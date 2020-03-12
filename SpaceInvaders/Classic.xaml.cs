@@ -13,23 +13,28 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SpaceInvaders
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainMenu : Page
+    public sealed partial class Classic : Page
     {
-        public MainMenu()
+        public Classic()
         {
             this.InitializeComponent();
         }
 
-        private void ToClassic(object sender, RoutedEventArgs e)
+        private void ToMenu(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Classic));
+            this.Frame.Navigate(typeof(MainMenu));
+        }
+
+        private void PlayClassic(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(ClassicGame));
         }
     }
 }

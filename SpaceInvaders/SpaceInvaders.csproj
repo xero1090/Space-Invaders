@@ -118,8 +118,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameMode1.xaml.cs">
-      <DependentUpon>GameMode1.xaml</DependentUpon>
+    <Compile Include="Classic.xaml.cs">
+      <DependentUpon>Classic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClassicGame.xaml.cs">
+      <DependentUpon>ClassicGame.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
@@ -146,7 +149,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="GameMode1.xaml">
+    <Page Include="Classic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ClassicGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
