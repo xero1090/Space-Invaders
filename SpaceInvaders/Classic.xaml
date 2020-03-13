@@ -14,7 +14,7 @@
             <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row= "0" Text="Instructions" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="45"/>
+        <TextBlock Grid.Row= "0" Text="Instructions" Margin="0,70,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45"/>
         <Button Grid.Row="2" HorizontalAlignment="Center" Content="Back" FontSize="30" Margin="0,0,260,0" Click="ToMenu" />
         <Button Grid.Row="2" HorizontalAlignment="Center" Content="Play" FontSize="30" Margin="260,0,0,0" Click="PlayClassic" />
     </Grid>
