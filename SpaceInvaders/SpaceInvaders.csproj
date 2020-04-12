@@ -118,6 +118,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Characters\CharInstance.cs" />
+    <Compile Include="Characters\Enemy.cs" />
     <Compile Include="Classic.xaml.cs">
       <DependentUpon>Classic.xaml</DependentUpon>
     </Compile>
