@@ -15,7 +15,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row= "0" Text="Instructions" Margin="0,70,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45"/>
-        <Button Grid.Row="2" HorizontalAlignment="Center" Content="Back" FontSize="30" Margin="0,0,260,0" Click="ToMenu" />
-        <Button Grid.Row="2" HorizontalAlignment="Center" Content="Play" FontSize="30" Margin="260,0,0,0" Click="PlayClassic" />
+        <Button Grid.Row="2" HorizontalAlignment="Center" Content="Back" FontSize="30" Margin="0,0,260,0" Click="ToMenu" Width="200" CornerRadius="10" BorderThickness="2" BorderBrush="#FF0C0C0D"/>
+        <Button Grid.Row="2" HorizontalAlignment="Center" Content="Play" FontSize="30" Margin="260,0,0,0" Click="PlayClassic" Width="200" CornerRadius="10" BorderThickness="2" BorderBrush="#FF0C0C0D"/>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Width="280" Grid.Row="1" FontSize="20" Text="Welcome Player! Use the arrow keys to move your tank, press the spacebar to fire your missile, hide behind the barrier to block any damage coming your way. Good Luck!" TextWrapping="Wrap" />
     </Grid>
 </Page>
