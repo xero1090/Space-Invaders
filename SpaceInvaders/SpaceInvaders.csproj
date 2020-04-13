@@ -143,15 +143,24 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\background.png" />
+    <Content Include="Assets\background1.png" />
     <Content Include="Assets\begin.ogg" />
     <Content Include="Assets\Boss.mp3" />
     <Content Include="Assets\Classic.mp3" />
     <Content Include="Assets\Gamemode2.mp3" />
     <Content Include="Assets\laser2.ogg" />
     <Content Include="Assets\laser3.ogg" />
+    <Content Include="Assets\life.png" />
     <Content Include="Assets\Missile.png" />
     <Content Include="Assets\Missile2.png" />
     <Content Include="Assets\Missile3.png" />
+    <Content Include="Assets\tank.png" />
+    <Content Include="Assets\XPowerup.png" />
+    <Content Include="Assets\powerupBlue_bolt.png" />
+    <Content Include="Assets\powerupGreen_bolt.png" />
+    <Content Include="Assets\powerupRed_bolt.png" />
+    <Content Include="Assets\powerupYellow_bolt.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

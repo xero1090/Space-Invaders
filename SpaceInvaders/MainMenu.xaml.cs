@@ -24,11 +24,15 @@ namespace SpaceInvaders
  
     public sealed partial class MainMenu : Page
     {
-       
-        
+        MediaPlayer soundplayer;
+
+
         public MainMenu()
         {
             this.InitializeComponent();
+            soundplayer = new MediaPlayer();
+            soundplayer.Pause();
+            soundplayer.Source = null;
         }
 
         private void ToClassic(object sender, RoutedEventArgs e)
@@ -40,6 +44,9 @@ namespace SpaceInvaders
         private void ToGame(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(ClassicGame), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/begin.ogg"));
+            soundplayer.Play();
+
         }
 
         private void Quit_Click(object sender, RoutedEventArgs e)
