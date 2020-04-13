@@ -47,7 +47,7 @@ namespace SpaceInvaders
             Windows.Storage.StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync(@"Assets");
 
             // Searches for specific file
-            Windows.Storage.StorageFile file = await folder.GetFileAsync("Classic.mp3");
+            Windows.Storage.StorageFile file = await folder.GetFileAsync("begin.ogg");
 
             //plays the song
             player.Source = MediaSource.CreateFromStorageFile(file);
