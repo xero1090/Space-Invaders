@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 
 
-namespace SpaceInvaders
+namespace SpaceInvaders.Characters
 {
 	public struct location
 	{
@@ -50,6 +50,7 @@ namespace SpaceInvaders
 		public bool IsHit()
 		{
 			//TODO: figure this crud out
+			return false;
 		}
 
 		public void Move(int xMod, int yMod)
@@ -66,7 +67,7 @@ namespace SpaceInvaders
 
 		public virtual void OnDestruction()
 		{
-			//TODO: Specific crap when you die
+			//TODO: Specific crap when it dies
 		}
 	}
 }

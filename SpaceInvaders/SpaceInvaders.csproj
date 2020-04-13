@@ -118,14 +118,19 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Characters\Barrier.cs" />
+    <Compile Include="Characters\Boss.cs" />
     <Compile Include="Characters\CharInstance.cs" />
     <Compile Include="Characters\Enemy.cs" />
+    <Compile Include="Characters\PlayerTurret.cs" />
     <Compile Include="Classic.xaml.cs">
       <DependentUpon>Classic.xaml</DependentUpon>
     </Compile>
     <Compile Include="ClassicGame.xaml.cs">
       <DependentUpon>ClassicGame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Entities\PowerUp.cs" />
+    <Compile Include="Entities\Projectile.cs" />
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
