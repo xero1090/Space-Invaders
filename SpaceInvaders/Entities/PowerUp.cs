@@ -46,5 +46,10 @@ namespace SpaceInvaders.Entities
         {
             _location.Y += yMod;
         } 
+
+        public void Contact()
+        {
+            // TODO: Do something when it connects with something
+        }
     }
 }

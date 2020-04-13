@@ -26,10 +26,15 @@ namespace SpaceInvaders.Entities
             _modifier = new int[] { xMod, yMod };
         }
 
-        public void move()
+        public void Move()
         {
             _location.X += _modifier[0];
             _location.Y += _modifier[1];
+        }
+
+        public void Hit()
+        {
+            //TODO: make something happens when it hits
         }
 
     }
