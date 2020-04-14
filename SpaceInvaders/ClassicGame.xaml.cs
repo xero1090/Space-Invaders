@@ -49,6 +49,8 @@ namespace SpaceInvaders
 
         private void KeyPress(object sender, KeyRoutedEventArgs e)
         {
+            Double Position = (Double)_tank.GetValue(Canvas.LeftProperty);
+
             switch (e.Key)
             {
                 //  Shooting
@@ -71,7 +73,8 @@ namespace SpaceInvaders
                 case Windows.System.VirtualKey.GamepadDPadLeft: // Left on the Dpad (controller)
                 case Windows.System.VirtualKey.GamepadLeftThumbstickLeft: // Left on the left thumbstick / analogstick (controller)
                 case Windows.System.VirtualKey.GamepadRightThumbstickLeft: // Left on the right thumbstick / analogstick (controller)
-                    //TODO: Move Left
+                     Position -= 10;
+                    _tank.SetValue(Canvas.LeftProperty, Position);
                     break;
 
                 // Moving Right
@@ -80,7 +83,8 @@ namespace SpaceInvaders
                 case Windows.System.VirtualKey.GamepadDPadRight: // Right on the Dpad (controller)
                 case Windows.System.VirtualKey.GamepadLeftThumbstickRight: // Right on the left thumbstick / analogstick (controller)
                 case Windows.System.VirtualKey.GamepadRightThumbstickRight: // Right on the right thumbstick / analogstick (controller)
-                    //TODO: Move Right
+                    Position += 10;
+                    _tank.SetValue(Canvas.LeftProperty, Position);
                     break;
 
             }

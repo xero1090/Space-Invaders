@@ -16,20 +16,29 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Image Grid.ColumnSpan="3" Grid.RowSpan="2" Source="Assets/background1.png"/>
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="1" Grid.Column="0" Padding="30" Width="200" Margin="15,0,0,20" HorizontalAlignment="Center" Orientation="Horizontal">
+        <Image Grid.ColumnSpan="3" Grid.RowSpan="3" Source="Assets/background1.png"/>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="1" Grid.Column="0" Padding="30" Width="200" Margin="33,0,0,20" HorizontalAlignment="Left" Orientation="Horizontal">
             <Image  Source="Assets/life.png" Height="52" Width="40" Margin="0,0,0,20"/>
             <Image  Source="Assets/life.png" Height="52" Width="40" Margin="0,0,0,20"/>
             <Image  Source="Assets/life.png" Height="52" Width="40" Margin="0,0,0,20"/>
         </StackPanel>
-        <Image Grid.Column="1" Grid.Row="0" Source="Assets/XPowerup.png" Height="32" Width="30" Margin="0,0,0,40" HorizontalAlignment="Left"/>
-        <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" KeyDown="KeyPress" Background="{x:Null}" Visibility="Visible">
-            <Image x:Name="_tank"  Stretch="None" NineGrid="100,0,0,0" RequestedTheme="Default" Source="/Assets/tank.png" />
+        <Image Grid.Column="1" Grid.Row="0" Source="Assets/XPowerup.png" Height="32" Width="30" Margin="30,63,0,30" HorizontalAlignment="Left"/>
+        <Canvas x:Name="_canvas" Grid.Column="1" Grid.Row="1">
+            <Rectangle x:Name="_tank" Height="100" Canvas.Left="460" Stroke="Black" Canvas.Top="375" Width="80">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/tank.png" Stretch="Uniform"/>
+                </Rectangle.Fill>
+            </Rectangle>
 
+        </Canvas>
+        <Button x:Name="_player" Grid.Column="1" Grid.Row="2" KeyDown="KeyPress" Visibility="Visible" Height="105" Width="124" HorizontalAlignment="Center">
+            <Button.Background>
+                <ImageBrush ImageSource="/Assets/Face Grin.png" Stretch="Uniform"/>
+            </Button.Background>
         </Button>
-           
 
     </Grid>
 </Page>
