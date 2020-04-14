@@ -20,14 +20,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Image Grid.ColumnSpan="3" Grid.RowSpan="3" Source="Assets/background1.png"/>
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="1" Grid.Column="0" Padding="30" Width="200" Margin="33,0,0,20" HorizontalAlignment="Left" Orientation="Horizontal">
-            <Image  Source="Assets/life.png" Height="52" Width="40" Margin="0,0,0,20"/>
-            <Image  Source="Assets/life.png" Height="52" Width="40" Margin="0,0,0,20"/>
-            <Image  Source="Assets/life.png" Height="52" Width="40" Margin="0,0,0,20"/>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="1" Grid.Column="0" Padding="30" Height="190" Width="200" Margin="3,0,0,20" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+            <Image  Source="Assets/life.png" Height="52" Width="40" Margin="0,0,0,0"/>
+            <Image  Source="Assets/life.png" Height="52" Width="40" Margin="0,0,0,0"/>
+            <Image  Source="Assets/life.png" Height="52" Width="40" Margin="0,0,0,0"/>
         </StackPanel>
-        <Image Grid.Column="1" Grid.Row="0" Source="Assets/XPowerup.png" Height="32" Width="30" Margin="30,63,0,30" HorizontalAlignment="Left"/>
+        <Image Grid.Column="1" Grid.Row="0" Source="Assets/XPowerup.png" Height="32" Width="30" Margin="30,0,0,18" HorizontalAlignment="Left"/>
         <Canvas x:Name="_canvas" Grid.Column="1" Grid.Row="1">
-            <Rectangle x:Name="_tank" Height="100" Canvas.Left="460" Stroke="Black" Canvas.Top="375" Width="80">
+            <Rectangle x:Name="_tank" Height="100" Canvas.Left="460" Canvas.Top="466" Width="80" FocusVisualPrimaryBrush="{x:Null}">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/tank.png" Stretch="Uniform"/>
                 </Rectangle.Fill>
