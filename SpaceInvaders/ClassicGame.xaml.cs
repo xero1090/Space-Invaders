@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Media.Core;
 using Windows.Media.Playback;
+using System.Drawing;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -26,14 +27,16 @@ namespace SpaceInvaders
     public sealed partial class ClassicGame : Page
     {
         MediaPlayer soundplayer;
+        MediaPlayer musicplayer;
         public ClassicGame()
         {
             this.InitializeComponent();
             soundplayer = new MediaPlayer();
-            soundplayer.Pause();
-            soundplayer.Source = null;
-            soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/classic.mp3"));
-            //soundplayer.Play();
+            musicplayer = new MediaPlayer();
+            musicplayer.Pause();
+            musicplayer.Source = null;
+            musicplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/classic.mp3"));
+            musicplayer.Play();
             
         }
         public void PlayerMissile_fired()
