@@ -68,6 +68,11 @@ namespace SpaceInvaders
                     //TODO: SHOOT
                     soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
                     soundplayer.Play();
+                    Rectangle missile = new Rectangle
+                    {
+                        Height = 35,
+                        Width = 15
+                    };
                     break;
 
                 // Moving Left
