@@ -47,12 +47,42 @@ namespace SpaceInvaders
             soundplayer.Play();
         }
 
-        private void moveTank(object sender, KeyRoutedEventArgs e)
+        private void KeyPress(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Left)
+            switch (e.Key)
             {
-            soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
-            soundplayer.Play();
+                //  Shooting
+                case Windows.System.VirtualKey.W: // W key
+                case Windows.System.VirtualKey.Up: // Up arrow key
+                case Windows.System.VirtualKey.Space: // Spacebar
+                case Windows.System.VirtualKey.GamepadDPadUp: // Up on the Dpad (controller)
+                case Windows.System.VirtualKey.GamepadLeftTrigger: // Left Trigger (controller)
+                case Windows.System.VirtualKey.GamepadRightTrigger: // Right Trigger (controller)
+                case Windows.System.VirtualKey.GamepadA: // A button (controller)
+                case Windows.System.VirtualKey.GamepadX: // X button (controller)
+                    //TODO: SHOOT
+                    soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
+                    soundplayer.Play();
+                    break;
+
+                // Moving Left
+                case Windows.System.VirtualKey.A: // A key
+                case Windows.System.VirtualKey.Left: // Left arrow key
+                case Windows.System.VirtualKey.GamepadDPadLeft: // Left on the Dpad (controller)
+                case Windows.System.VirtualKey.GamepadLeftThumbstickLeft: // Left on the left thumbstick / analogstick (controller)
+                case Windows.System.VirtualKey.GamepadRightThumbstickLeft: // Left on the right thumbstick / analogstick (controller)
+                    //TODO: Move Left
+                    break;
+
+                // Moving Right
+                case Windows.System.VirtualKey.D: // D key
+                case Windows.System.VirtualKey.Right: // Right arrow Key
+                case Windows.System.VirtualKey.GamepadDPadRight: // Right on the Dpad (controller)
+                case Windows.System.VirtualKey.GamepadLeftThumbstickRight: // Right on the left thumbstick / analogstick (controller)
+                case Windows.System.VirtualKey.GamepadRightThumbstickRight: // Right on the right thumbstick / analogstick (controller)
+                    //TODO: Move Right
+                    break;
+
             }
         }
     }
