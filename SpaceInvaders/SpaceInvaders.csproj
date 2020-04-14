@@ -147,7 +147,7 @@
     <Content Include="Assets\background1.png" />
     <Content Include="Assets\begin.ogg" />
     <Content Include="Assets\Boss.mp3" />
-    <Content Include="Assets\Classic.mp3" />
+    <Content Include="Assets\classic.mp3" />
     <Content Include="Assets\enemyBlack3.png" />
     <Content Include="Assets\enemyBlue4.png" />
     <Content Include="Assets\enemyGreen2.png" />
@@ -158,7 +158,7 @@
     <Content Include="Assets\Missile.png" />
     <Content Include="Assets\Missile2.png" />
     <Content Include="Assets\Missile3.png" />
-    <Content Include="Assets\Sr Pelo Boom Sound Effect.mp3" />
+    <Content Include="Assets\boom.mp3" />
     <Content Include="Assets\tank.png" />
     <Content Include="Assets\XPowerup.png" />
     <Content Include="Assets\powerupBlue_bolt.png" />
@@ -196,6 +196,9 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.8</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Kenney Thick.ttf" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

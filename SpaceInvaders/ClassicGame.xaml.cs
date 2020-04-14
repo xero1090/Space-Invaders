@@ -32,6 +32,8 @@ namespace SpaceInvaders
             soundplayer = new MediaPlayer();
             soundplayer.Pause();
             soundplayer.Source = null;
+            soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/classic.mp3"));
+            //soundplayer.Play();
             
         }
         public void PlayerMissile_fired()
@@ -45,5 +47,13 @@ namespace SpaceInvaders
             soundplayer.Play();
         }
 
+        private void moveTank(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Left)
+            {
+            soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
+            soundplayer.Play();
+            }
+        }
     }
 }
