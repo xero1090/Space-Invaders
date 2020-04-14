@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 using System.Drawing;
+using Windows.UI.Core;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -25,7 +26,7 @@ namespace SpaceInvaders
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class ClassicGame : Page
-    {
+    { 
         MediaPlayer soundplayer;
         MediaPlayer musicplayer;
         public ClassicGame()
@@ -68,33 +69,28 @@ namespace SpaceInvaders
                     //TODO: SHOOT
                     soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
                     soundplayer.Play();
-                    Rectangle missile = new Rectangle
-                    {
-                        Height = 35,
-                        Width = 15
-                    };
                     break;
 
-                // Moving Left
-                case Windows.System.VirtualKey.A: // A key
-                case Windows.System.VirtualKey.Left: // Left arrow key
-                case Windows.System.VirtualKey.GamepadDPadLeft: // Left on the Dpad (controller)
-                case Windows.System.VirtualKey.GamepadLeftThumbstickLeft: // Left on the left thumbstick / analogstick (controller)
-                case Windows.System.VirtualKey.GamepadRightThumbstickLeft: // Left on the right thumbstick / analogstick (controller)
-                     Position -= 10;
-                    _tank.SetValue(Canvas.LeftProperty, Position);
-                    break;
+            // Moving Left
+            if (Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.A).HasFlag(CoreVirtualKeyStates.Down) || // A key
+                    Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.Left).HasFlag(CoreVirtualKeyStates.Down) || // Left arrow key
+                    Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.GamepadDPadLeft).HasFlag(CoreVirtualKeyStates.Down) || // Left on the Dpad (controller)
+                    Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.GamepadLeftThumbstickLeft).HasFlag(CoreVirtualKeyStates.Down) || // Left on the left thumbstick / analogstick (controller)
+                    Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.GamepadRightThumbstickLeft).HasFlag(CoreVirtualKeyStates.Down)) // Left on the right thumbstick / analogstick (controller)
+            {
+                Position -= 10;
+                _tank.SetValue(Canvas.LeftProperty, Position);
+            }
 
-                // Moving Right
-                case Windows.System.VirtualKey.D: // D key
-                case Windows.System.VirtualKey.Right: // Right arrow Key
-                case Windows.System.VirtualKey.GamepadDPadRight: // Right on the Dpad (controller)
-                case Windows.System.VirtualKey.GamepadLeftThumbstickRight: // Right on the left thumbstick / analogstick (controller)
-                case Windows.System.VirtualKey.GamepadRightThumbstickRight: // Right on the right thumbstick / analogstick (controller)
-                    Position += 10;
-                    _tank.SetValue(Canvas.LeftProperty, Position);
-                    break;
-
+            // Moving Right
+            if (Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.D).HasFlag(CoreVirtualKeyStates.Down) || // D key
+                       Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.Right).HasFlag(CoreVirtualKeyStates.Down) || // Right arrow key
+                       Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.GamepadDPadRight).HasFlag(CoreVirtualKeyStates.Down) || // Right on the Dpad (controller)
+                       Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.GamepadLeftThumbstickRight).HasFlag(CoreVirtualKeyStates.Down) || // Right on the left thumbstick / analogstick (controller)
+                       Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.GamepadRightThumbstickRight).HasFlag(CoreVirtualKeyStates.Down)) // Right on the right thumbstick / analogstick (controller)
+            {       
+                Position += 10;
+                _tank.SetValue(Canvas.LeftProperty, Position);
             }
         }
     }

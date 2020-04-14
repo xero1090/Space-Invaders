@@ -34,11 +34,7 @@
             </Rectangle>
 
         </Canvas>
-        <Button x:Name="_player" Grid.Column="1" Grid.Row="2" KeyDown="KeyPress" Visibility="Visible" Height="105" Width="124" HorizontalAlignment="Center">
-            <Button.Background>
-                <ImageBrush ImageSource="/Assets/Face Grin.png" Stretch="Uniform"/>
-            </Button.Background>
-        </Button>
+        <Image x:Name="_player" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" FocusVisualPrimaryBrush="{x:Null}" Source="/Assets/Face Grin.png"/>
 
     </Grid>
 </Page>
