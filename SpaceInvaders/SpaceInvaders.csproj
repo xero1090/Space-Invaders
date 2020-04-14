@@ -152,6 +152,7 @@
     <Content Include="Assets\enemyBlue4.png" />
     <Content Include="Assets\enemyGreen2.png" />
     <Content Include="Assets\enemyRed5.png" />
+    <Content Include="Assets\explosion.ogg" />
     <Content Include="Assets\Face Grin.png" />
     <Content Include="Assets\Face shoot.png" />
     <Content Include="Assets\laser2.ogg" />
