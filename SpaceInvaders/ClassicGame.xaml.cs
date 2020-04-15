@@ -28,6 +28,8 @@ namespace SpaceInvaders
     /// </summary>
     public sealed partial class ClassicGame : Page
     {
+        double _position;
+
         BitmapImage _imgFaceGrin;
         BitmapImage _imgFaceShoot;
         ImageBrush _imgTank;
@@ -46,6 +48,7 @@ namespace SpaceInvaders
             musicplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/classic.mp3"));
             //musicplayer.Play(); // UNCOMMENT FOR LOUD MUSIC
 
+            _position = (double) _tank.GetValue(Canvas.LeftProperty);
             _imgFaceGrin = new BitmapImage(new Uri("ms-appx:///Assets/Face Grin.png"));
             _imgFaceShoot = new BitmapImage(new Uri("ms-appx:///Assets/Face shoot.png"));
             _imgTank = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank.png")) };
@@ -64,7 +67,7 @@ namespace SpaceInvaders
 
         private void KeyPress(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
-            Double Position = (Double)_tank.GetValue(Canvas.LeftProperty);
+            
 
             //  Shooting
             if (sender.GetKeyState(Windows.System.VirtualKey.W).HasFlag(CoreVirtualKeyStates.Down) || // W key
@@ -95,8 +98,10 @@ namespace SpaceInvaders
                     sender.GetKeyState(Windows.System.VirtualKey.GamepadLeftThumbstickLeft).HasFlag(CoreVirtualKeyStates.Down) || // Left on the left thumbstick / analogstick (controller)
                     sender.GetKeyState(Windows.System.VirtualKey.GamepadRightThumbstickLeft).HasFlag(CoreVirtualKeyStates.Down)) // Left on the right thumbstick / analogstick (controller)
             {
-                Position -= 10;
-                _tank.SetValue(Canvas.LeftProperty, Position);
+                if (_position > 0)
+                {
+                    _position -= 10;
+                }
             }
 
             // Moving Right
@@ -105,10 +110,15 @@ namespace SpaceInvaders
                        sender.GetKeyState(Windows.System.VirtualKey.GamepadDPadRight).HasFlag(CoreVirtualKeyStates.Down) || // Right on the Dpad (controller)
                        sender.GetKeyState(Windows.System.VirtualKey.GamepadLeftThumbstickRight).HasFlag(CoreVirtualKeyStates.Down) || // Right on the left thumbstick / analogstick (controller)
                        sender.GetKeyState(Windows.System.VirtualKey.GamepadRightThumbstickRight).HasFlag(CoreVirtualKeyStates.Down)) // Right on the right thumbstick / analogstick (controller)
-            {       
-                Position += 10;
-                _tank.SetValue(Canvas.LeftProperty, Position);
+            {
+                if (_position < (_canvas.ActualWidth - _tank.Width))
+                {
+                    _position += 10;
+                }
             }
+
+            // Sending in the change
+            _tank.SetValue(Canvas.LeftProperty, _position);
         }
     }
 }
