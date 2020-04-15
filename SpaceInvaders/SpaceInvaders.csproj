@@ -162,6 +162,7 @@
     <Content Include="Assets\Missile2.png" />
     <Content Include="Assets\Missile3.png" />
     <Content Include="Assets\boom.mp3" />
+    <Content Include="Assets\tank fire.png" />
     <Content Include="Assets\tank.png" />
     <Content Include="Assets\XPowerup.png" />
     <Content Include="Assets\powerupBlue_bolt.png" />

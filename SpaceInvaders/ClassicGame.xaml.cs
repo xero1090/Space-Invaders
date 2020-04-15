@@ -16,6 +16,7 @@ using Windows.Media.Core;
 using Windows.Media.Playback;
 using System.Drawing;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Media.Imaging;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -26,7 +27,12 @@ namespace SpaceInvaders
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class ClassicGame : Page
-    { 
+    {
+        BitmapImage _imgFaceGrin;
+        BitmapImage _imgFaceShoot;
+        ImageBrush _imgTank;
+        ImageBrush _imgTankFire;
+
         MediaPlayer soundplayer;
         MediaPlayer musicplayer;
         public ClassicGame()
@@ -39,7 +45,11 @@ namespace SpaceInvaders
             musicplayer.Source = null;
             musicplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/classic.mp3"));
             //musicplayer.Play(); // UNCOMMENT FOR LOUD MUSIC
-            
+
+            _imgFaceGrin = new BitmapImage(new Uri("ms-appx:///Assets/Face Grin.png"));
+            _imgFaceShoot = new BitmapImage(new Uri("ms-appx:///Assets/Face shoot.png"));
+            _imgTank = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank.png")) };
+            _imgTankFire = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank fire.png")) };
         }
         public void PlayerMissile_fired()
         {
@@ -67,8 +77,15 @@ namespace SpaceInvaders
                     sender.GetKeyState(Windows.System.VirtualKey.GamepadX).HasFlag(CoreVirtualKeyStates.Down)) // X button (controller)
             {
                 //TODO: SHOOT
+                _face.Source = _imgFaceShoot;
+                _tank.Fill = _imgTankFire;
                 soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
                 soundplayer.Play();
+            }
+            else
+            {
+                _face.Source = _imgFaceGrin;
+                _tank.Fill = _imgTank;
             }
 
             // Moving Left

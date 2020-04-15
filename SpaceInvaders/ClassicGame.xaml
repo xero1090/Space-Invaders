@@ -34,7 +34,7 @@
             </Rectangle>
 
         </Canvas>
-        <Image x:Name="_player" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" FocusVisualPrimaryBrush="{x:Null}" Source="/Assets/Face Grin.png"/>
+        <Image x:Name="_face" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" FocusVisualPrimaryBrush="{x:Null}" Source="/Assets/Face Grin.png"/>
 
     </Grid>
 </Page>
