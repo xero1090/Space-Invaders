@@ -86,7 +86,6 @@ namespace SpaceInvaders
                 _game.PlayerShoot(_missile);
                 _face.Source = _imgFaceShoot;
                 _missile.Fill = _rocket;
-                _missile.Visibility = 0;
                 soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
                 soundplayer.Play();
             }
