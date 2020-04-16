@@ -11,7 +11,7 @@ namespace SpaceInvaders.Entities
     class Projectile
     {
         private location _location;
-        private int[] _modifier;
+        private double[] _modifier;
         private BitmapImage _sprite;
 
         public location Location
@@ -20,10 +20,10 @@ namespace SpaceInvaders.Entities
         public BitmapImage Sprite
         { get { return _sprite; } set { _sprite = value; } }
 
-        public Projectile(int xStart, int yStart, int xMod, int yMod)
+        public Projectile(double xStart, double yStart, double xMod, double yMod)
         {
             _location = new location(xStart, yStart);
-            _modifier = new int[] { xMod, yMod };
+            _modifier = new double[] { xMod, yMod };
         }
 
         public void Move()

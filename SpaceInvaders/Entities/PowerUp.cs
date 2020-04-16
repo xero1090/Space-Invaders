@@ -32,13 +32,13 @@ namespace SpaceInvaders.Entities
         public BitmapImage Sprite
         { get { return _sprite; } set { _sprite = value; } }
 
-        public PowerUp(int xStart, int yStart, Effect type)
+        public PowerUp(double xStart, double yStart, Effect type)
         {
             _location = new location(xStart, yStart);
             _type = type;
         }
 
-        public PowerUp(int xStart, int yStart) : this(xStart, yStart, Effect.ExtraPoints)
+        public PowerUp(double xStart, double yStart) : this(xStart, yStart, Effect.ExtraPoints)
         {
         }
 

@@ -17,6 +17,7 @@ using Windows.Media.Playback;
 using System.Drawing;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Media.Imaging;
+using SpaceInvaders.Characters;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -29,6 +30,8 @@ namespace SpaceInvaders
     public sealed partial class ClassicGame : Page
     {
         double _position;
+        SpaceInvaders _game;
+        PlayerTurret _playerTurret;
 
         BitmapImage _imgFaceGrin;
         BitmapImage _imgFaceShoot;
@@ -53,6 +56,8 @@ namespace SpaceInvaders
             _imgFaceShoot = new BitmapImage(new Uri("ms-appx:///Assets/Face shoot.png"));
             _imgTank = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank.png")) };
             _imgTankFire = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank fire.png")) };
+            _playerTurret = new PlayerTurret(_position, (double)_tank.GetValue(Canvas.TopProperty), _imgTank, _imgTankFire, _tank);
+            _game = new SpaceInvaders(ref _playerTurret, _canvas);
         }
         public void PlayerMissile_fired()
         {
@@ -79,9 +84,8 @@ namespace SpaceInvaders
                     sender.GetKeyState(Windows.System.VirtualKey.GamepadA).HasFlag(CoreVirtualKeyStates.Down) || // A button (controller)
                     sender.GetKeyState(Windows.System.VirtualKey.GamepadX).HasFlag(CoreVirtualKeyStates.Down)) // X button (controller)
             {
-                //TODO: SHOOT
+                _game.Player.ShootMissile();
                 _face.Source = _imgFaceShoot;
-                _tank.Fill = _imgTankFire;
                 soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
                 soundplayer.Play();
             }
@@ -98,10 +102,7 @@ namespace SpaceInvaders
                     sender.GetKeyState(Windows.System.VirtualKey.GamepadLeftThumbstickLeft).HasFlag(CoreVirtualKeyStates.Down) || // Left on the left thumbstick / analogstick (controller)
                     sender.GetKeyState(Windows.System.VirtualKey.GamepadRightThumbstickLeft).HasFlag(CoreVirtualKeyStates.Down)) // Left on the right thumbstick / analogstick (controller)
             {
-                if (_position > 0)
-                {
-                    _position -= 10;
-                }
+                _game.PlayerMove(-10);
             }
 
             // Moving Right
@@ -111,14 +112,8 @@ namespace SpaceInvaders
                        sender.GetKeyState(Windows.System.VirtualKey.GamepadLeftThumbstickRight).HasFlag(CoreVirtualKeyStates.Down) || // Right on the left thumbstick / analogstick (controller)
                        sender.GetKeyState(Windows.System.VirtualKey.GamepadRightThumbstickRight).HasFlag(CoreVirtualKeyStates.Down)) // Right on the right thumbstick / analogstick (controller)
             {
-                if (_position < (_canvas.ActualWidth - _tank.Width))
-                {
-                    _position += 10;
-                }
+                _game.PlayerMove(10);
             }
-
-            // Sending in the change
-            _tank.SetValue(Canvas.LeftProperty, _position);
         }
     }
 }
