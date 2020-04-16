@@ -34,7 +34,7 @@ namespace SpaceInvaders
         BitmapImage _imgFaceShoot;
         ImageBrush _imgTank;
         ImageBrush _imgTankFire;
-
+        ImageBrush _rocket; 
         MediaPlayer soundplayer;
         MediaPlayer musicplayer;
         public ClassicGame()
@@ -49,6 +49,7 @@ namespace SpaceInvaders
             //musicplayer.Play(); // UNCOMMENT FOR LOUD MUSIC
 
             _position = (double) _tank.GetValue(Canvas.LeftProperty);
+            _rocket = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Missile.png"))};
             _imgFaceGrin = new BitmapImage(new Uri("ms-appx:///Assets/Face Grin.png"));
             _imgFaceShoot = new BitmapImage(new Uri("ms-appx:///Assets/Face shoot.png"));
             _imgTank = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank.png")) };
@@ -80,10 +81,14 @@ namespace SpaceInvaders
                     sender.GetKeyState(Windows.System.VirtualKey.GamepadX).HasFlag(CoreVirtualKeyStates.Down)) // X button (controller)
             {
                 //TODO: SHOOT
+                _missile.Fill = _rocket; 
                 _face.Source = _imgFaceShoot;
                 _tank.Fill = _imgTankFire;
                 soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
                 soundplayer.Play();
+                _tank.Fill = _imgTank;
+                _missile.Visibility = 0;
+                
             }
             else
             {

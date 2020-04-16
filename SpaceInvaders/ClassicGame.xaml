@@ -33,6 +33,11 @@
                     <ImageBrush ImageSource="/Assets/tank.png" Stretch="Uniform"/>
                 </Rectangle.Fill>
             </Rectangle>
+            <Rectangle x:Name="_missile" Visibility="Collapsed" Height="60" Width="40" Canvas.Left="310" Canvas.Top="250" FocusVisualPrimaryBrush="{x:Null}">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/Missile.png" Stretch="Uniform"/>
+                </Rectangle.Fill>
+            </Rectangle>
         </Canvas>
         <Image x:Name="_face" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" FocusVisualPrimaryBrush="{x:Null}" Source="/Assets/Face Grin.png"/>
 
