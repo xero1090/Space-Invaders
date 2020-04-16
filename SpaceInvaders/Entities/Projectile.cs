@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 using SpaceInvaders.Characters;
 using Windows.UI.Xaml.Shapes;
+using Windows.UI.Xaml.Controls;
 
 namespace SpaceInvaders.Entities
 {
@@ -34,13 +35,14 @@ namespace SpaceInvaders.Entities
 
         public void Move()
         {
-            _location.X += _modifier[0];
             _location.Y += _modifier[1];
+            _obj.SetValue(Canvas.TopProperty, _location.Y);
         }
 
         public void Hit()
         {
-            //TODO: make something happens when it hits
+            _obj.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            _obj = null;
         }
 
     }

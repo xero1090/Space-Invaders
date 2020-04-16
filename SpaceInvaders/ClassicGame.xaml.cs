@@ -18,6 +18,8 @@ using System.Drawing;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Media.Imaging;
 using SpaceInvaders.Characters;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -43,35 +45,38 @@ namespace SpaceInvaders
         public ClassicGame()
         {
             this.InitializeComponent();
-            Window.Current.CoreWindow.KeyDown += KeyPress;
-            soundplayer = new MediaPlayer();
-            musicplayer = new MediaPlayer();
-            musicplayer.Pause();
-            musicplayer.Source = null;
-            musicplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/classic.mp3"));
+            Window.Current.CoreWindow.KeyDown += KeyPress; // input
+            SoundLoader();
             //musicplayer.Play(); // UNCOMMENT FOR LOUD MUSIC
-            _rocket = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Missile.png")) };
+            SpriteLoader();
             _position = (double) _tank.GetValue(Canvas.LeftProperty);
-            _imgFaceGrin = new BitmapImage(new Uri("ms-appx:///Assets/Face Grin.png"));
-            _imgFaceShoot = new BitmapImage(new Uri("ms-appx:///Assets/Face shoot.png"));
-            _imgTank = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank.png")) };
-            _imgTankFire = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank fire.png")) };
             _playerTurret = new PlayerTurret(_position, (double)_tank.GetValue(Canvas.TopProperty), _imgTank, _imgTankFire, _tank);
             _game = new SpaceInvaders(ref _playerTurret, _canvas);
         }
-        public void PlayerMissile_fired()
+
+        private void PlayerMissile_fired()
         {
-            
+            _game.PlayerShoot(_missile); // missile copy creation
+            _face.Source = _imgFaceShoot;
+            _missile.Fill = _rocket;
+            soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
+            soundplayer.Play();
         }
-        public void EnemyMissile_fired()
+        private void EnemyMissile_fired()
         {
             soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/laser3.ogg"));
             soundplayer.Play();
         }
 
+        public void MakeItHappen()
+        {
+           _game.BulletCheck();
+        }
+
         private void KeyPress(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
-            
+
+            MakeItHappen();
 
             //  Shooting
             if (sender.GetKeyState(Windows.System.VirtualKey.W).HasFlag(CoreVirtualKeyStates.Down) || // W key
@@ -83,11 +88,7 @@ namespace SpaceInvaders
                     sender.GetKeyState(Windows.System.VirtualKey.GamepadA).HasFlag(CoreVirtualKeyStates.Down) || // A button (controller)
                     sender.GetKeyState(Windows.System.VirtualKey.GamepadX).HasFlag(CoreVirtualKeyStates.Down)) // X button (controller)
             {
-                _game.PlayerShoot(_missile);
-                _face.Source = _imgFaceShoot;
-                _missile.Fill = _rocket;
-                soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
-                soundplayer.Play();
+                PlayerMissile_fired();
             }
             else
             {
@@ -114,6 +115,24 @@ namespace SpaceInvaders
             {
                 _game.PlayerMove(10);
             }
+        }
+
+        private void SpriteLoader()
+        {
+            _imgFaceGrin = new BitmapImage(new Uri("ms-appx:///Assets/Face Grin.png"));
+            _imgFaceShoot = new BitmapImage(new Uri("ms-appx:///Assets/Face shoot.png"));
+            _imgTank = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank.png")) };
+            _imgTankFire = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank fire.png")) };
+            _rocket = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Missile.png")) };
+        }
+
+        private void SoundLoader()
+        {
+            soundplayer = new MediaPlayer();
+            musicplayer = new MediaPlayer();
+            musicplayer.Pause();
+            musicplayer.Source = null;
+            musicplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/classic.mp3"));
         }
     }
 }

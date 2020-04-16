@@ -36,14 +36,31 @@ namespace SpaceInvaders
         public void PlayerShoot(Rectangle missileCopy)
         {
             Projectile missile = _player.ShootMissile(missileCopy);
+            missile.Move();
             _canvas.Children.Add(missile.Obj);
             _bullets.Add(missile);
-
         }
 
         public void BulletCheck()
         {
-            //TODO: check bullets for contact with any instances or entities
+            List<Projectile> active = new List<Projectile>();
+            foreach (Projectile bullet in _bullets)
+            {
+                bullet.Move();
+
+                if (bullet.Location.Y <= 0)
+                {
+                    bullet.Hit();
+                }
+                else
+                {
+                    active.Add(bullet);
+                }
+            }
+
+            _bullets.Clear();
+            _bullets = active;
+            active = null;
         }
 
         public void PlayerMove(double xMod)
