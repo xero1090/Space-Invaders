@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
-
+using Windows.UI.Xaml.Shapes;
 
 namespace SpaceInvaders.Characters
 {
 	public struct location
 	{
-		private int _xLocation;
-		private int _yLocation;
+		private double _xLocation;
+		private double _yLocation;
 
-		public int X
+		public double X
 		{ get { return _xLocation; } set { _xLocation = value; } }
-		public int Y
+		public double Y
 		{ get { return _yLocation; } set { _yLocation = value; } }
 
-		public location(int xLoc, int yLoc)
+		public location(double xLoc, double yLoc)
 		{
 			_xLocation = xLoc;
 			_yLocation = yLoc;
@@ -31,6 +32,7 @@ namespace SpaceInvaders.Characters
 		protected location _location;
 		protected bool _isAlive;
 		protected BitmapImage _sprite;
+		protected Rectangle _obj;
 
 		public location Location
 		{ get { return _location; } }
@@ -41,9 +43,13 @@ namespace SpaceInvaders.Characters
 		public BitmapImage Sprite
 		{ get { return _sprite; } set { _sprite = value; } }
 
-		public CharInstance(int xStart, int yStart)
+		public Rectangle Obj
+		{ get { return _obj; } }
+
+		public CharInstance(double xStart, double yStart, Rectangle obj)
 		{
 			_location = new location(xStart, yStart);
+			_obj = obj;
 			_isAlive = true;
 		}
 
@@ -53,16 +59,22 @@ namespace SpaceInvaders.Characters
 			return false;
 		}
 
-		public void Move(int xMod, int yMod)
+		public void Move(double xMod, double yMod)
 		{
 			_location.X += xMod;
 			_location.Y += yMod;
+
+			_obj.SetValue(Canvas.LeftProperty, _location.X);
+			_obj.SetValue(Canvas.TopProperty, _location.Y);
 		}
 
-		public void MoveTo(int xSet, int ySet)
+		public void MoveTo(double xSet, double ySet)
 		{
 			_location.X = xSet;
 			_location.Y = ySet;
+
+			_obj.SetValue(Canvas.LeftProperty, _location.X);
+			_obj.SetValue(Canvas.TopProperty, _location.Y);
 		}
 
 		public virtual void OnDestruction()

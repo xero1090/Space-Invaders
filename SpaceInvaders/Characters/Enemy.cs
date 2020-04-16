@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Shapes;
 
 namespace SpaceInvaders.Characters
 {
 	public class Enemy : CharInstance
 	{
-		public Enemy(int xStart, int yStart, BitmapImage enemySprite) : base(xStart, yStart)
+		public Enemy(double xStart, double yStart, BitmapImage enemySprite, Rectangle obj) : base(xStart, yStart, obj)
 		{
 			base._sprite = enemySprite;
 		}
