@@ -14,6 +14,10 @@ namespace SpaceInvaders
 {
     class SpaceInvaders
     {
+
+        const sbyte DEFAULT_MISSILE_SPEED = -20;
+        const sbyte DEFAULT_LASER_SPEED = 20;
+
         private List<CharInstance> _targets;
         private List<Enemy> _enemies;
         private List<Projectile> _bullets;
@@ -36,10 +40,36 @@ namespace SpaceInvaders
 
         public void PlayerShoot(Rectangle missileCopy)
         {
-            Projectile missile = _player.ShootMissile(missileCopy);
+            Projectile missile = CreateMissile(missileCopy, _player);
+            _player.ShootMissile();
             missile.Move();
             _canvas.Children.Add(missile.Obj);
             _bullets.Add(missile);
+        }
+
+
+        private Projectile CreateMissile(Rectangle missileCopy, CharInstance shooter)
+        {
+            sbyte velocity = DEFAULT_LASER_SPEED;
+
+            // copying the missile
+            Rectangle projection = new Rectangle();
+            projection.Width = missileCopy.Width;
+            projection.Height = missileCopy.Height;
+            projection.Fill = missileCopy.Fill;
+            projection.SetValue(Canvas.TopProperty, (double)shooter.Obj.GetValue(Canvas.TopProperty) - projection.Height / 1.5);
+            projection.SetValue(Canvas.LeftProperty, (double)shooter.Obj.GetValue(Canvas.LeftProperty) + (shooter.Obj.Width / 2 - projection.Width / 2));
+            projection.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
+            if (shooter.GetType() == _player.GetType())
+            {
+                velocity = DEFAULT_MISSILE_SPEED;
+            }
+
+            // creating the projectile
+            Projectile missile = new Projectile(shooter.Location.X, shooter.Location.Y, 0, velocity, projection);
+
+            return missile;
         }
 
         public void BulletCheck(ImageBrush explosion)

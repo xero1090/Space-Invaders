@@ -25,6 +25,7 @@ namespace SpaceInvaders.Entities
         private Rectangle _obj;
         private MissileState _state;
 
+
         public location Location
         { get { return _location; } }
 
