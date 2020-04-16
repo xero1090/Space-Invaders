@@ -32,7 +32,7 @@ namespace SpaceInvaders
         double _position;
         SpaceInvaders _game;
         PlayerTurret _playerTurret;
-
+        ImageBrush _rocket;
         BitmapImage _imgFaceGrin;
         BitmapImage _imgFaceShoot;
         ImageBrush _imgTank;
@@ -50,7 +50,7 @@ namespace SpaceInvaders
             musicplayer.Source = null;
             musicplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/classic.mp3"));
             //musicplayer.Play(); // UNCOMMENT FOR LOUD MUSIC
-
+            _rocket = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Missile.png")) };
             _position = (double) _tank.GetValue(Canvas.LeftProperty);
             _imgFaceGrin = new BitmapImage(new Uri("ms-appx:///Assets/Face Grin.png"));
             _imgFaceShoot = new BitmapImage(new Uri("ms-appx:///Assets/Face shoot.png"));
@@ -61,8 +61,7 @@ namespace SpaceInvaders
         }
         public void PlayerMissile_fired()
         {
-            soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/laser2.ogg"));
-            soundplayer.Play();
+            
         }
         public void EnemyMissile_fired()
         {
@@ -86,6 +85,8 @@ namespace SpaceInvaders
             {
                 _game.PlayerShoot(_missile);
                 _face.Source = _imgFaceShoot;
+                _missile.Fill = _rocket;
+                _missile.Visibility = 0;
                 soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
                 soundplayer.Play();
             }
