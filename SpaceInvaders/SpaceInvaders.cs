@@ -33,6 +33,14 @@ namespace SpaceInvaders
             _canvas = canvas;
         }
 
+        public void PlayerShoot(Rectangle missileCopy)
+        {
+            Projectile missile = _player.ShootMissile(missileCopy);
+            _canvas.Children.Add(missile.Obj);
+            _bullets.Add(missile);
+
+        }
+
         public void BulletCheck()
         {
             //TODO: check bullets for contact with any instances or entities

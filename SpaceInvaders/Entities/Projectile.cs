@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 using SpaceInvaders.Characters;
+using Windows.UI.Xaml.Shapes;
 
 namespace SpaceInvaders.Entities
 {
@@ -13,6 +14,7 @@ namespace SpaceInvaders.Entities
         private location _location;
         private double[] _modifier;
         private BitmapImage _sprite;
+        protected Rectangle _obj;
 
         public location Location
         { get { return _location; } }
@@ -20,10 +22,14 @@ namespace SpaceInvaders.Entities
         public BitmapImage Sprite
         { get { return _sprite; } set { _sprite = value; } }
 
-        public Projectile(double xStart, double yStart, double xMod, double yMod)
+        public Rectangle Obj
+        { get { return _obj; } }
+
+        public Projectile(double xStart, double yStart, double xMod, double yMod, Rectangle obj)
         {
             _location = new location(xStart, yStart);
             _modifier = new double[] { xMod, yMod };
+            _obj = obj;
         }
 
         public void Move()

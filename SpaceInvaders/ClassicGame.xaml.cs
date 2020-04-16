@@ -84,7 +84,7 @@ namespace SpaceInvaders
                     sender.GetKeyState(Windows.System.VirtualKey.GamepadA).HasFlag(CoreVirtualKeyStates.Down) || // A button (controller)
                     sender.GetKeyState(Windows.System.VirtualKey.GamepadX).HasFlag(CoreVirtualKeyStates.Down)) // X button (controller)
             {
-                _game.Player.ShootMissile();
+                _game.PlayerShoot(_missile);
                 _face.Source = _imgFaceShoot;
                 soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
                 soundplayer.Play();

@@ -7,12 +7,15 @@ using Windows.UI.Xaml.Media.Imaging;
 using SpaceInvaders.Entities;
 using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Controls;
+using SpaceInvaders;
 
 namespace SpaceInvaders.Characters
 {
     class PlayerTurret : CharInstance
     {
         const byte DEFAULT_LIVES = 3;
+        const byte DEFAULT_MISSILE_SPEED = 20;
         private byte _lives;
         private bool _doubleShot;
         private ImageBrush _spriteShoot;
@@ -28,10 +31,10 @@ namespace SpaceInvaders.Characters
             _doubleShot = false;
         }
 
-        public void ShootMissile()
+        public Projectile ShootMissile(Rectangle missileCopy)
         {
             _obj.Fill = _spriteShoot;
-            //TODO: Bang Bang
+            return CreateMissile(missileCopy);
         }
 
         public override void OnDestruction()
@@ -44,6 +47,20 @@ namespace SpaceInvaders.Characters
         public void OnPowerUp(Effect type)
         {
             //TODO: implement buffs
+        }
+
+        private Projectile CreateMissile(Rectangle missileCopy)
+        {
+            Rectangle projection = new Rectangle();
+            projection.Width = missileCopy.Width;
+            projection.Height = missileCopy.Height;
+            projection.Fill = missileCopy.Fill;
+            projection.SetValue(Canvas.TopProperty, (double) _obj.GetValue(Canvas.TopProperty) - projection.Height/1.5);
+            projection.SetValue(Canvas.LeftProperty, (double) _obj.GetValue(Canvas.LeftProperty) + (_obj.Width/2 - projection.Width/2));
+            projection.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            Projectile missile = new Projectile(_location.X, _location.Y, 0, DEFAULT_MISSILE_SPEED, projection);
+
+            return missile;
         }
     }
 }
