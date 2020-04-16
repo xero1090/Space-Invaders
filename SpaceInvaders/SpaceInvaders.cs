@@ -8,6 +8,7 @@ using SpaceInvaders.Characters;
 using SpaceInvaders.Entities;
 using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace SpaceInvaders
 {
@@ -41,20 +42,25 @@ namespace SpaceInvaders
             _bullets.Add(missile);
         }
 
-        public void BulletCheck()
+        public void BulletCheck(ImageBrush explosion)
         {
             List<Projectile> active = new List<Projectile>();
             foreach (Projectile bullet in _bullets)
             {
                 bullet.Move();
 
-                if (bullet.Location.Y <= 0)
+                if (bullet.State == MissileState.Intact)
                 {
-                    bullet.Hit();
+                    if (bullet.Location.Y <= 0)
+                    {
+                        bullet.MoveTo(0);
+                        bullet.Hit(explosion);
+                    }
+                    active.Add(bullet);
                 }
                 else
                 {
-                    active.Add(bullet);
+                    bullet.Destroy();
                 }
             }
 

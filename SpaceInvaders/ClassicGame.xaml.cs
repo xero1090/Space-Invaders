@@ -31,14 +31,28 @@ namespace SpaceInvaders
     /// </summary>
     public sealed partial class ClassicGame : Page
     {
+        // Constants
+        const int INTERVAL = 10;
+        const byte FIRE_WAIT = 10;
+
+        // Field Variables
+        bool _canFire;
+        byte _counter;
+
+        // Objects
         double _position;
         SpaceInvaders _game;
         PlayerTurret _playerTurret;
+        DispatcherTimer _timer;
+
+        // Images
         ImageBrush _rocket;
         BitmapImage _imgFaceGrin;
         BitmapImage _imgFaceShoot;
         ImageBrush _imgTank;
         ImageBrush _imgTankFire;
+        ImageBrush _explode;
+        
 
         MediaPlayer soundplayer;
         MediaPlayer musicplayer;
@@ -52,15 +66,50 @@ namespace SpaceInvaders
             _position = (double) _tank.GetValue(Canvas.LeftProperty);
             _playerTurret = new PlayerTurret(_position, (double)_tank.GetValue(Canvas.TopProperty), _imgTank, _imgTankFire, _tank);
             _game = new SpaceInvaders(ref _playerTurret, _canvas);
+            TimerSetup();
+            _canFire = true;
+            _counter = 0;
+        }
+
+        /// <summary>
+        /// Practically acts as the game loop
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _timer_Tick(object sender, object e)
+        {
+            _game.BulletCheck(_explode);
+
+            if (_counter%FIRE_WAIT == 0)
+            {
+                _canFire = true;
+            }
+
+            if (_counter % 20*FIRE_WAIT == 0)
+            {
+                _face.Source = _imgFaceGrin;
+                _tank.Fill = _imgTank;
+            }
+
+            if (_counter == 201)
+            {
+                _counter = 0;
+            }
+
+            ++_counter;
         }
 
         private void PlayerMissile_fired()
         {
-            _game.PlayerShoot(_missile); // missile copy creation
-            _face.Source = _imgFaceShoot;
-            _missile.Fill = _rocket;
-            soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
-            soundplayer.Play();
+            if (_canFire)
+            {
+                _game.PlayerShoot(_missile); // missile copy creation
+                _face.Source = _imgFaceShoot;
+                _missile.Fill = _rocket;
+                _canFire = false;
+                soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
+                soundplayer.Play();
+            }
         }
         private void EnemyMissile_fired()
         {
@@ -68,15 +117,8 @@ namespace SpaceInvaders
             soundplayer.Play();
         }
 
-        public void MakeItHappen()
-        {
-           _game.BulletCheck();
-        }
-
         private void KeyPress(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
-
-            MakeItHappen();
 
             //  Shooting
             if (sender.GetKeyState(Windows.System.VirtualKey.W).HasFlag(CoreVirtualKeyStates.Down) || // W key
@@ -89,11 +131,6 @@ namespace SpaceInvaders
                     sender.GetKeyState(Windows.System.VirtualKey.GamepadX).HasFlag(CoreVirtualKeyStates.Down)) // X button (controller)
             {
                 PlayerMissile_fired();
-            }
-            else
-            {
-                _face.Source = _imgFaceGrin;
-                _tank.Fill = _imgTank;
             }
 
             // Moving Left
@@ -124,6 +161,7 @@ namespace SpaceInvaders
             _imgTank = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank.png")) };
             _imgTankFire = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank fire.png")) };
             _rocket = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Missile.png")) };
+            _explode = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Splosion.png")) };
         }
 
         private void SoundLoader()
@@ -133,6 +171,14 @@ namespace SpaceInvaders
             musicplayer.Pause();
             musicplayer.Source = null;
             musicplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/classic.mp3"));
+        }
+
+        private void TimerSetup()
+        {
+            _timer = new DispatcherTimer();
+            _timer.Tick += _timer_Tick;
+            _timer.Interval = new TimeSpan(0, 0, 0, 0, INTERVAL);
+            _timer.Start();
         }
     }
 }
