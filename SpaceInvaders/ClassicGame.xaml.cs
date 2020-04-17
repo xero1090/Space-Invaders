@@ -108,13 +108,13 @@ namespace SpaceInvaders
                 _face.Source = _imgFaceShoot;
                 _missile.Fill = _imgRocket;
                 _canFire = false;
-                soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
+                soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/boom.mp3"));
                 soundplayer.Play();
             }
         }
         private void EnemyMissile_fired()
         {
-            soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/laser3.ogg"));
+            soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/laser3.ogg"));
             soundplayer.Play();
         }
 
@@ -178,7 +178,7 @@ namespace SpaceInvaders
             musicplayer = new MediaPlayer();
             musicplayer.Pause();
             musicplayer.Source = null;
-            musicplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/classic.mp3"));
+            musicplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/classic.mp3"));
         }
 
         private void TimerSetup()
