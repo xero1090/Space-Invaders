@@ -12,8 +12,7 @@ namespace SpaceInvaders.Characters
 {
 	public class Enemy : CharInstance
 	{
-        int rows;
-        int skins;
+        
         const byte HP =  1;
         private ImageBrush _enemyShoot;
         private byte _health;
@@ -33,15 +32,6 @@ namespace SpaceInvaders.Characters
 		{
 			//TODO: Specific crap when the enemy dies
 		}
-        public void CreateEnemies()
-        {
-            for (skins = 0; skins >= 4; skins++)
-            {
-                for (rows = 0; rows >= 4; rows++)
-                {
-
-                }
-            }
-        }
+        
 	}
 }
