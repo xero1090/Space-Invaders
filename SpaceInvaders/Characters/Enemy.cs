@@ -15,12 +15,10 @@ namespace SpaceInvaders.Characters
         int rows;
         int skins;
         const byte HP =  1;
-        private ImageBrush _enemyShoot;
         private byte _health;
-		public Enemy(double xStart, double yStart, BitmapImage enemySprite, ImageBrush enemyShoot, Rectangle obj) : base(xStart, yStart, obj)
+		public Enemy(double xStart, double yStart, BitmapImage enemySprite, Rectangle obj) : base(xStart, yStart, obj)
 		{
 			base._sprite = enemySprite;
-            _enemyShoot = enemyShoot;
             _health = HP;
 		}
 

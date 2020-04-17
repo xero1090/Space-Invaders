@@ -43,9 +43,15 @@ namespace SpaceInvaders
             // setup in here (create rows, sprites, etc)
         }
 
-        private Enemy CreateEnemy()
+        private Enemy CreateEnemy(Rectangle enemyCopy, double xStart, double yStart, ImageBrush sprite)
         {
-            return null;
+            Rectangle projection = new Rectangle();
+            projection.Width = enemyCopy.Width;
+            projection.Height = enemyCopy.Height;
+            projection.Fill = sprite;
+
+            Enemy enemy = new Enemy(xStart, yStart, sprite.ImageSource as BitmapImage, projection);
+            return enemy;
         }
 
         public void PlayerShoot(Rectangle missileCopy)
