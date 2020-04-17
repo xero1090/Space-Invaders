@@ -44,7 +44,7 @@ namespace SpaceInvaders
             _player = playerTurret;
             _canvas = canvas;
             _direction = EnemyDirection.Right;
-            _goLeft = true;
+            _goLeft = false;
             _skip = false;
             _enemyWidth = enemyWidth;
         }
