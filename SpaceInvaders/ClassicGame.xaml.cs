@@ -34,6 +34,7 @@ namespace SpaceInvaders
         // Constants
         const int INTERVAL = 10;
         const byte FIRE_WAIT = 10;
+        const byte ENEMY_MOVE_WAIT = 50;
 
         // Field Variables
         bool _canFire;
@@ -77,6 +78,11 @@ namespace SpaceInvaders
         private void _timer_Tick(object sender, object e)
         {
             _game.BulletCheck(_imgExplode);
+
+            if (_counter % ENEMY_MOVE_WAIT == 0)
+            {
+                _game.EnemyMove();
+            }
 
             if (_counter%FIRE_WAIT == 0)
             {
@@ -196,9 +202,9 @@ namespace SpaceInvaders
         {
             _position = (double)_tank.GetValue(Canvas.LeftProperty);
             _playerTurret = new PlayerTurret(_position, (double)_tank.GetValue(Canvas.TopProperty), _imgTank, _imgTankFire, _tank);
-            _game = new SpaceInvaders(ref _playerTurret, _canvas);
+            _game = new SpaceInvaders(ref _playerTurret, _canvas, _enemy.Width);
             _canFire = true;
-            _counter = 0;
+            _counter = 1;
             EnemyCreation();
         }
     }

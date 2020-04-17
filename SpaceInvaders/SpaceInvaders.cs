@@ -15,10 +15,15 @@ namespace SpaceInvaders
     class SpaceInvaders
     {
 
-        const sbyte DEFAULT_MISSILE_SPEED = -20;
-        const sbyte DEFAULT_LASER_SPEED = 20;
-        const byte DEFAULT_ENEMY_COLUMNS = 10;
-        const double ENEMY_PLACEMENT_BUFFER = 8;
+        private const sbyte DEFAULT_MISSILE_SPEED = -20;
+        private const sbyte DEFAULT_LASER_SPEED = 20;
+        private const byte DEFAULT_ENEMY_COLUMNS = 10;
+        private const double ENEMY_PLACEMENT_BUFFER = 8;
+
+        private EnemyDirection _direction;
+        private double _enemyWidth;
+        private bool _goLeft;
+        private bool _skip;
 
         private List<CharInstance> _targets;
         private List<Enemy> _enemies;
@@ -30,7 +35,7 @@ namespace SpaceInvaders
         public PlayerTurret Player
         { get { return _player; } }
 
-        public SpaceInvaders(ref PlayerTurret playerTurret, Canvas canvas)
+        public SpaceInvaders(ref PlayerTurret playerTurret, Canvas canvas, double enemyWidth)
         {
             _targets = new List<CharInstance>();
             _enemies = new List<Enemy>();
@@ -38,6 +43,10 @@ namespace SpaceInvaders
             _powerUps = new List<PowerUp>();
             _player = playerTurret;
             _canvas = canvas;
+            _direction = EnemyDirection.Right;
+            _goLeft = true;
+            _skip = false;
+            _enemyWidth = enemyWidth;
         }
 
         public void EnemySetup( List<ImageBrush> shipSprites, Rectangle enemyCopy)
@@ -130,6 +139,82 @@ namespace SpaceInvaders
             _bullets = active;
             active = null;
         }
+
+        public void EnemyMove()
+        {
+            _direction = WhichDirection();
+
+            switch (_direction)
+            {
+                case EnemyDirection.Right:
+                    foreach (Enemy enemy in _enemies)
+                    {
+                        enemy.Move(enemy.Obj.Width + ENEMY_PLACEMENT_BUFFER, 0);
+                    }
+                    break;
+
+                case EnemyDirection.Left:
+                    foreach (Enemy enemy in _enemies)
+                    {
+                        enemy.Move(-(enemy.Obj.Width + ENEMY_PLACEMENT_BUFFER), 0);
+                    }
+                    break;
+
+                case EnemyDirection.Down:
+                    foreach (Enemy enemy in _enemies)
+                    {
+                        enemy.Move(0, enemy.Obj.Width + ENEMY_PLACEMENT_BUFFER);
+                    }
+                    break;
+            }
+        }
+
+        private EnemyDirection WhichDirection()
+        {
+            double mostLeft = _canvas.Width;
+            double mostRight = 0;
+            double adjustWidth = _enemyWidth + ENEMY_PLACEMENT_BUFFER;
+
+            if (!_skip)
+            {
+                foreach (Enemy enemy in _enemies)
+                {
+                    if (enemy.Location.X + enemy.Obj.Width > mostRight)
+                    {
+                        mostRight = (enemy.Location.X + enemy.Obj.Width);
+                    }
+
+                    if (enemy.Location.X < mostLeft)
+                    {
+                        mostLeft = enemy.Location.X;
+                    }
+                }
+            }
+
+            _skip = false;
+
+            if (mostRight >= _canvas.Width - adjustWidth)
+            {
+                _goLeft = true;
+                _skip = true;
+                return EnemyDirection.Down;
+            }
+            else if (mostLeft <= _enemyWidth)
+            {
+                _goLeft = false;
+                _skip = true;
+                return EnemyDirection.Down;
+            }
+
+            if (_goLeft)
+            {
+                return EnemyDirection.Left;
+            }
+
+            return EnemyDirection.Right;
+
+        }
+
        
         public void PlayerMove(double xMod)
         {

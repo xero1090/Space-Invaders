@@ -10,15 +10,19 @@ using Windows.UI.Xaml.Shapes;
 
 namespace SpaceInvaders.Characters
 {
+	public enum EnemyDirection
+	{
+		Left = -1,
+		Down,
+		Right
+	}
+
 	public class Enemy : CharInstance
 	{
         
-        const byte HP =  1;
-        private byte _health;
 		public Enemy(double xStart, double yStart, BitmapImage enemySprite, Rectangle obj) : base(xStart, yStart, obj)
 		{
 			base._sprite = enemySprite;
-            _health = HP;
 		}
 
         public void EnemyShoot()
