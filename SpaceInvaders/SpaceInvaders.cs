@@ -41,7 +41,16 @@ namespace SpaceInvaders
 
         public void setup()
         {
-            // setup in here (create rows, sprites, etc)
+            void CreateEnemies()
+            {
+                for (skins = 0; skins >= 4; skins++)
+                {
+                    for (rows = 0; rows >= 4; rows++)
+                    {
+
+                    }
+                }
+            }
         }
 
         private Enemy CreateEnemy()
@@ -109,16 +118,7 @@ namespace SpaceInvaders
             _bullets = active;
             active = null;
         }
-        public void CreateEnemies()
-        {
-            for (skins = 0; skins >= 4; skins++)
-            {
-                for (rows = 0; rows >= 4; rows++)
-                {
-                   
-                }
-            }
-        }
+       
         public void PlayerMove(double xMod)
         {
             if (xMod <= 0)
