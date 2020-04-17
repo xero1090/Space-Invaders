@@ -13,7 +13,7 @@ namespace SpaceInvaders.Entities
 {
     enum MissileState
     {
-        Intact = 1,
+        Intact,
         Explode
     }
 

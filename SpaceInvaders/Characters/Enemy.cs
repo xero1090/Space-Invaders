@@ -31,7 +31,8 @@ namespace SpaceInvaders.Characters
 
 		public override void OnDestruction()
 		{
-			//TODO: Specific crap when the enemy dies
+			_obj.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+			_obj = null;
 		}
         
 	}

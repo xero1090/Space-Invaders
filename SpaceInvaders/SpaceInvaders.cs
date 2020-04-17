@@ -115,6 +115,7 @@ namespace SpaceInvaders
 
         public void BulletCheck(ImageBrush explosion)
         {
+            bool hit = false;
             List<Projectile> active = new List<Projectile>();
             foreach (Projectile bullet in _bullets)
             {
@@ -122,12 +123,22 @@ namespace SpaceInvaders
 
                 if (bullet.State == MissileState.Intact)
                 {
-                    if (bullet.Location.Y <= 0)
+                    if (HitAlien(bullet))
+                    {
+                        hit = true;
+                    }
+                    else if (bullet.Location.Y <= 0)
                     {
                         bullet.MoveTo(0);
+                        hit = true;
+                    }
+
+                    if (hit)
+                    {
                         bullet.Hit(explosion);
                     }
                     active.Add(bullet);
+                    hit = false;
                 }
                 else
                 {
@@ -233,5 +244,53 @@ namespace SpaceInvaders
                 }
             }
         }
+
+        private bool HitAlien(Projectile bullet)
+        {
+            for (int index = 0; index < _enemies.Count; ++index)
+            {
+                if (CollideCheck(bullet, _enemies[index]))
+                {
+                    _enemies[index].OnDestruction();
+                    _enemies.RemoveAt(index);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool CollideCheck(Projectile projectile, CharInstance character)
+        {
+            bool yCollision = false;
+            bool xCollision = false;
+
+            // checking y axis
+            if (projectile.Location.Y >= character.Location.Y && projectile.Location.Y <= character.Location.Y + character.Obj.Height) // Checking highest point
+            {
+                yCollision = true;
+            }
+            if (projectile.Location.Y + projectile.Obj.Height >= character.Location.Y && projectile.Location.Y + projectile.Obj.Height <= character.Location.Y + character.Obj.Height) // Checking lowest point
+            {
+                yCollision = true;
+            }
+
+            // checking x axis
+            if (projectile.Location.X >= character.Location.X - character.Obj.Width && projectile.Location.X <= character.Location.X) // Checking left most point
+            {
+                xCollision = true;
+            }
+            if (projectile.Location.X + projectile.Obj.Width >= character.Location.X - character.Obj.Width && projectile.Location.X + projectile.Obj.Width <= character.Location.X) // Checking right most point
+            {
+                xCollision = true;
+            }
+
+            if (yCollision && xCollision)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

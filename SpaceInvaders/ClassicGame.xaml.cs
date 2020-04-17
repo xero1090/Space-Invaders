@@ -81,7 +81,7 @@ namespace SpaceInvaders
 
             if (_counter % ENEMY_MOVE_WAIT == 0)
             {
-                _game.EnemyMove();
+                _game.EnemyMove(); //UNCOMMENT FOR MOVEMENT
             }
 
             if (_counter%FIRE_WAIT == 0)
