@@ -46,12 +46,13 @@ namespace SpaceInvaders
         DispatcherTimer _timer;
 
         // Images
-        ImageBrush _rocket;
+        ImageBrush _imgRocket;
         BitmapImage _imgFaceGrin;
         BitmapImage _imgFaceShoot;
         ImageBrush _imgTank;
         ImageBrush _imgTankFire;
-        ImageBrush _explode;
+        ImageBrush _imgExplode;
+        List<ImageBrush> _imgEnemys;
         
 
         MediaPlayer soundplayer;
@@ -78,7 +79,7 @@ namespace SpaceInvaders
         /// <param name="e"></param>
         private void _timer_Tick(object sender, object e)
         {
-            _game.BulletCheck(_explode);
+            _game.BulletCheck(_imgExplode);
 
             if (_counter%FIRE_WAIT == 0)
             {
@@ -105,7 +106,7 @@ namespace SpaceInvaders
             {
                 _game.PlayerShoot(_missile); // missile copy creation
                 _face.Source = _imgFaceShoot;
-                _missile.Fill = _rocket;
+                _missile.Fill = _imgRocket;
                 _canFire = false;
                 soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/boom.mp3"));
                 soundplayer.Play();
@@ -160,8 +161,15 @@ namespace SpaceInvaders
             _imgFaceShoot = new BitmapImage(new Uri("ms-appx:///Assets/Face shoot.png"));
             _imgTank = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank.png")) };
             _imgTankFire = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank fire.png")) };
-            _rocket = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Missile.png")) };
-            _explode = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Splosion.png")) };
+            _imgRocket = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Missile.png")) };
+            _imgExplode = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Splosion.png")) };
+
+            _imgEnemys = new List<ImageBrush>();
+            _imgEnemys.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyGreen2.png")) });
+            _imgEnemys.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlack3.png")) });
+            _imgEnemys.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlue4.png")) });
+            _imgEnemys.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyRed5.png")) });
+
         }
 
         private void SoundLoader()
