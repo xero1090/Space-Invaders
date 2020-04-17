@@ -103,11 +103,14 @@ namespace SpaceInvaders
             if (_game.Player.Lives == 0)
             {
                 // Player Dies
+                _gameover.Visibility = 0;
+                //enemies.move = false;
             }
 
             if (_game.Enemies.Count == 0)
             {
                 // All Aliens Die
+                _win.Visibility = 0;
             }
 
             ++_counter;

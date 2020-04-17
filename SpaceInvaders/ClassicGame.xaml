@@ -43,8 +43,14 @@
                     <ImageBrush ImageSource="/Assets/enemyBlack.png"/>
                 </Rectangle.Fill>
             </Rectangle>
+            <Rectangle x:Name="_shield" Height="135" Canvas.Left="245" Canvas.Top="265" Width="155" Visibility="Collapsed">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/shield.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
         </Canvas>
         <Image x:Name="_face" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" FocusVisualPrimaryBrush="{x:Null}" Source="/Assets/Face Grin.png" Margin="0,0,0,20"/>
-
+        <TextBlock x:Name="_gameover" Text="you failed to save the earth Comrade!" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="100" TextAlignment="Center" FontSize="23" Visibility="Collapsed"/>
+        <TextBlock x:Name="_win" Text="you saved the earth Comrade!" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="100" TextAlignment="Center" FontSize="23" Visibility="Collapsed"/>
     </Grid>
 </Page>

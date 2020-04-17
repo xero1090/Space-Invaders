@@ -146,6 +146,8 @@
     <Content Include="Assets\background.png" />
     <Content Include="Assets\background1.png" />
     <Content Include="Assets\begin.ogg" />
+    <Content Include="Assets\ClassicBackground.png" />
+    <Content Include="Assets\shield.png" />
     <Content Include="Assets\Sounds\Boss.mp3" />
     <Content Include="Assets\Sounds\classic.mp3" />
     <Content Include="Assets\enemyBlack.png" />
