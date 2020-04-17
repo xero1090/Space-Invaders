@@ -17,7 +17,8 @@ namespace SpaceInvaders
 
         const sbyte DEFAULT_MISSILE_SPEED = -20;
         const sbyte DEFAULT_LASER_SPEED = 20;
-
+        int rows;
+        int skins;
         private List<CharInstance> _targets;
         private List<Enemy> _enemies;
         private List<Projectile> _bullets;
@@ -40,7 +41,13 @@ namespace SpaceInvaders
 
         public void setup()
         {
-            // setup in here (create rows, sprites, etc)
+            for (skins = 0; skins >= 4; ++skins)
+            {
+                for (rows = 0; rows >= 4; ++rows)
+                {
+
+                }
+            }
         }
 
         private Enemy CreateEnemy(Rectangle enemyCopy, double xStart, double yStart, ImageBrush sprite)
@@ -114,7 +121,7 @@ namespace SpaceInvaders
             _bullets = active;
             active = null;
         }
-
+       
         public void PlayerMove(double xMod)
         {
             if (xMod <= 0)
