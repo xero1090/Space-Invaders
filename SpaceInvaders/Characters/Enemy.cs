@@ -23,15 +23,15 @@ namespace SpaceInvaders.Characters
             _enemyShoot = enemyShoot;
             _health = HP;
 		}
-        /* public Projectile EnemyLaser(Rectangle lasers)
+
+        public void EnemyShoot()
         {
-            _obj.Fill = _enemyShoot
-            return
-        } */
+			_obj.Fill = _enemyShoot;
+        }
+
 		public override void OnDestruction()
 		{
 			//TODO: Specific crap when the enemy dies
-			base.OnDestruction();
 		}
         public void CreateEnemies()
         {
