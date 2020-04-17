@@ -17,8 +17,9 @@ namespace SpaceInvaders
 
         const sbyte DEFAULT_MISSILE_SPEED = -20;
         const sbyte DEFAULT_LASER_SPEED = 20;
-        int rows;
-        int skins;
+        const byte DEFAULT_ENEMY_COLUMNS = 10;
+        const double ENEMY_PLACEMENT_BUFFER = 8;
+
         private List<CharInstance> _targets;
         private List<Enemy> _enemies;
         private List<Projectile> _bullets;
@@ -39,13 +40,18 @@ namespace SpaceInvaders
             _canvas = canvas;
         }
 
-        public void setup()
+        public void EnemySetup( List<ImageBrush> shipSprites, Rectangle enemyCopy)
         {
-            for (skins = 0; skins >= 4; ++skins)
-            {
-                for (rows = 0; rows >= 4; ++rows)
-                {
+            Enemy enemyHolder;
+            double placementStart = _canvas.Width / 2 - ((DEFAULT_ENEMY_COLUMNS / 2)* (enemyCopy.Width + ENEMY_PLACEMENT_BUFFER));
 
+            for (byte rows = 0; rows < shipSprites.Count; ++rows)
+            {
+                for (byte columns = 0; columns < DEFAULT_ENEMY_COLUMNS; ++columns)
+                {
+                     enemyHolder = (CreateEnemy(enemyCopy, placementStart + (columns * (enemyCopy.Width + ENEMY_PLACEMENT_BUFFER)), rows*(enemyCopy.Height + ENEMY_PLACEMENT_BUFFER), shipSprites[rows]));
+                    _canvas.Children.Add(enemyHolder.Obj);
+                    _enemies.Add(enemyHolder);
                 }
             }
         }
@@ -56,6 +62,9 @@ namespace SpaceInvaders
             projection.Width = enemyCopy.Width;
             projection.Height = enemyCopy.Height;
             projection.Fill = sprite;
+            projection.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            projection.SetValue(Canvas.TopProperty, yStart);
+            projection.SetValue(Canvas.LeftProperty, xStart);
 
             Enemy enemy = new Enemy(xStart, yStart, sprite.ImageSource as BitmapImage, projection);
             return enemy;

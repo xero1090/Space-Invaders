@@ -52,6 +52,7 @@ namespace SpaceInvaders
         ImageBrush _imgTank;
         ImageBrush _imgTankFire;
         ImageBrush _imgExplode;
+        ImageBrush _imgEnemyDeath;
         List<ImageBrush> _imgEnemies;
         
 
@@ -64,12 +65,8 @@ namespace SpaceInvaders
             SoundLoader();
             //musicplayer.Play(); // UNCOMMENT FOR LOUD MUSIC
             SpriteLoader();
-            _position = (double) _tank.GetValue(Canvas.LeftProperty);
-            _playerTurret = new PlayerTurret(_position, (double)_tank.GetValue(Canvas.TopProperty), _imgTank, _imgTankFire, _tank);
-            _game = new SpaceInvaders(ref _playerTurret, _canvas);
             TimerSetup();
-            _canFire = true;
-            _counter = 0;
+            GameSetup();
         }
 
         /// <summary>
@@ -98,6 +95,11 @@ namespace SpaceInvaders
             }
 
             ++_counter;
+        }
+
+        private void EnemyCreation()
+        {
+            _game.EnemySetup(_imgEnemies, _enemy);
         }
 
         private void PlayerMissile_fired()
@@ -163,6 +165,7 @@ namespace SpaceInvaders
             _imgTankFire = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank fire.png")) };
             _imgRocket = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Missile.png")) };
             _imgExplode = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Splosion.png")) };
+            _imgEnemyDeath = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Explode4.png")) };
 
             _imgEnemies = new List<ImageBrush>();
             _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyRed.png")) }); 
@@ -187,6 +190,16 @@ namespace SpaceInvaders
             _timer.Tick += _timer_Tick;
             _timer.Interval = new TimeSpan(0, 0, 0, 0, INTERVAL);
             _timer.Start();
+        }
+
+        private void GameSetup()
+        {
+            _position = (double)_tank.GetValue(Canvas.LeftProperty);
+            _playerTurret = new PlayerTurret(_position, (double)_tank.GetValue(Canvas.TopProperty), _imgTank, _imgTankFire, _tank);
+            _game = new SpaceInvaders(ref _playerTurret, _canvas);
+            _canFire = true;
+            _counter = 0;
+            EnemyCreation();
         }
     }
 }
