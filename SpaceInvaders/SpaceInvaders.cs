@@ -38,6 +38,16 @@ namespace SpaceInvaders
             _canvas = canvas;
         }
 
+        public void setup()
+        {
+            // setup in here (create rows, sprites, etc)
+        }
+
+        private Enemy CreateEnemy()
+        {
+            return null;
+        }
+
         public void PlayerShoot(Rectangle missileCopy)
         {
             Projectile missile = CreateMissile(missileCopy, _player);

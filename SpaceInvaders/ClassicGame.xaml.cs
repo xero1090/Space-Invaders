@@ -52,7 +52,7 @@ namespace SpaceInvaders
         ImageBrush _imgTank;
         ImageBrush _imgTankFire;
         ImageBrush _imgExplode;
-        List<ImageBrush> _imgEnemys;
+        List<ImageBrush> _imgEnemies;
         
 
         MediaPlayer soundplayer;
@@ -164,11 +164,11 @@ namespace SpaceInvaders
             _imgRocket = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Missile.png")) };
             _imgExplode = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Splosion.png")) };
 
-            _imgEnemys = new List<ImageBrush>();
-            _imgEnemys.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyGreen2.png")) });
-            _imgEnemys.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlack3.png")) });
-            _imgEnemys.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlue4.png")) });
-            _imgEnemys.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyRed5.png")) });
+            _imgEnemies = new List<ImageBrush>();
+            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyRed5.png")) }); // Orange
+            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyGreen2.png")) }); // Green
+            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlue4.png")) }); // Blue
+            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlack3.png")) }); // Black
 
         }
 
