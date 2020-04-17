@@ -39,6 +39,7 @@ namespace SpaceInvaders
         // Field Variables
         bool _canFire;
         byte _counter;
+        byte _score;
 
         // Objects
         double _position;
