@@ -26,6 +26,7 @@ namespace SpaceInvaders.Characters
         public void EnemyShoot()
         {
 			_obj.Fill = _enemyShoot;
+            
         }
 
 		public override void OnDestruction()

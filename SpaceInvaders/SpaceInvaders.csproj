@@ -148,10 +148,10 @@
     <Content Include="Assets\begin.ogg" />
     <Content Include="Assets\Sounds\Boss.mp3" />
     <Content Include="Assets\Sounds\classic.mp3" />
-    <Content Include="Assets\enemyBlack3.png" />
-    <Content Include="Assets\enemyBlue4.png" />
-    <Content Include="Assets\enemyGreen2.png" />
-    <Content Include="Assets\enemyRed5.png" />
+    <Content Include="Assets\enemyBlack.png" />
+    <Content Include="Assets\enemyBlue.png" />
+    <Content Include="Assets\enemyGreen.png" />
+    <Content Include="Assets\enemyRed.png" />
     <Content Include="Assets\Sounds\explosion.ogg" />
     <Content Include="Assets\explosion2.png" />
     <Content Include="Assets\explosion3.png" />
@@ -210,7 +210,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Kenney Thick.ttf" />
+    <Content Include="Assets\Fonts\KenneyThick.ttf" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

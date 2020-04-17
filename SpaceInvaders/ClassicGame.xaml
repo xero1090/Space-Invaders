@@ -38,9 +38,59 @@
                     <ImageBrush ImageSource="/Assets/Missile.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Rectangle x:Name="_enemy" Height="50" Width="50" Visibility="Collapsed">
+            <Rectangle x:Name="_enemy" Height="50" Width="50" Visibility="Visible">
                 <Rectangle.Fill>
-                    <ImageBrush ImageSource="ms-appx:///Assets/enemyGreen2.png"/>
+                    <ImageBrush ImageSource="/Assets/enemyBlack.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Height="50" Width="50" Visibility="Visible" Canvas.Left="60">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/enemyBlack.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Height="50" Width="50" Visibility="Visible" Canvas.Left="120">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/enemyBlack.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Height="50" Width="50" Visibility="Visible" Canvas.Left="180">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/enemyBlack.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Height="50" Width="50" Visibility="Visible" Canvas.Left="240">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/enemyBlack.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Height="50" Width="50" Visibility="Visible" Canvas.Left="300">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/enemyBlack.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Height="50" Width="50" Visibility="Visible" Canvas.Left="360">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/enemyBlack.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Height="50" Width="50" Visibility="Visible" Canvas.Left="420">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/enemyBlack.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Height="50" Width="50" Visibility="Visible" Canvas.Left="480">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/enemyBlack.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Height="50" Width="50" Visibility="Visible" Canvas.Left="540">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/enemyBlack.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Height="50" Width="50" Visibility="Visible" Canvas.Left="600">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/enemyBlack.png"/>
                 </Rectangle.Fill>
             </Rectangle>
 

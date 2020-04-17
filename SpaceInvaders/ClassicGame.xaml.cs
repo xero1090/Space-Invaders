@@ -165,10 +165,10 @@ namespace SpaceInvaders
             _imgExplode = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Splosion.png")) };
 
             _imgEnemies = new List<ImageBrush>();
-            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyRed5.png")) }); // Orange
-            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyGreen2.png")) }); // Green
-            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlue4.png")) }); // Blue
-            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlack3.png")) }); // Black
+            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyRed.png")) }); 
+            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyGreen.png")) }); 
+            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlue.png")) }); 
+            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlack.png")) });
 
         }
 

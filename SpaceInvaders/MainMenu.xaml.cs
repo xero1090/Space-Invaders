@@ -30,6 +30,7 @@ namespace SpaceInvaders
         public MainMenu()
         {
             this.InitializeComponent();
+            _title.FontFamily = new FontFamily("/Assets/Fonts/KenneyThick.ttf#Kenney Thick Regular");
             soundplayer = new MediaPlayer();
             soundplayer.Pause();
             soundplayer.Source = null;
@@ -54,5 +55,7 @@ namespace SpaceInvaders
             CoreApplication.Exit();
 
         }
+
+        
     }
 }

@@ -25,12 +25,14 @@ namespace SpaceInvaders
         private List<PowerUp> _powerUps;
         private PlayerTurret _player;
         private Canvas _canvas;
+        private List<ImageBrush> _enemysprite;
 
         public PlayerTurret Player
         { get { return _player; } }
 
         public SpaceInvaders(ref PlayerTurret playerTurret, Canvas canvas)
         {
+            _enemysprite = new List<ImageBrush>();
             _targets = new List<CharInstance>();
             _enemies = new List<Enemy>();
             _bullets = new List<Projectile>();
@@ -39,22 +41,23 @@ namespace SpaceInvaders
             _canvas = canvas;
         }
 
-        public void setup()
+        public void setup(Rectangle enemyCopy)
         {
-            void CreateEnemies()
-            {
-                for (skins = 0; skins >= 4; skins++)
-                {
-                    for (rows = 0; rows >= 4; rows++)
-                    {
 
-                    }
-                }
-            }
         }
 
         private Enemy CreateEnemy()
         {
+            for (skins = 0; skins >= 4; skins++)
+            {
+                for (rows = 0; rows >= 4; rows++)
+                {
+                   _enemysprite.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyRed5.png")) }); // Orange
+                   _enemysprite.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyGreen2.png")) }); // Green
+                   _enemysprite.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlue4.png")) }); // Blue
+                   _enemysprite.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlack3.png")) }); // Black
+                }
+            }
             return null;
         }
 
