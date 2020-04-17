@@ -55,7 +55,6 @@ namespace SpaceInvaders
         ImageBrush _imgExplode;
         ImageBrush _imgEnemyDeath;
         List<ImageBrush> _imgEnemies;
-        
 
         MediaPlayer soundplayer;
         MediaPlayer musicplayer;
@@ -98,6 +97,16 @@ namespace SpaceInvaders
             if (_counter == 201)
             {
                 _counter = 0;
+            }
+
+            if (_game.Player.Lives == 0)
+            {
+                // Player Dies
+            }
+
+            if (_game.Enemies.Count == 0)
+            {
+                // All Aliens Die
             }
 
             ++_counter;

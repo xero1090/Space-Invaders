@@ -35,6 +35,9 @@ namespace SpaceInvaders
         public PlayerTurret Player
         { get { return _player; } }
 
+        public List<Enemy> Enemies
+        { get { return _enemies; } }
+
         public SpaceInvaders(ref PlayerTurret playerTurret, Canvas canvas, double enemyWidth)
         {
             _targets = new List<CharInstance>();

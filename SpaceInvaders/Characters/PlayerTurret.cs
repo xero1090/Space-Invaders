@@ -9,7 +9,6 @@ using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Controls;
 using SpaceInvaders;
-using Windows.UI.Popups;
 
 namespace SpaceInvaders.Characters
 {
@@ -19,7 +18,6 @@ namespace SpaceInvaders.Characters
         private byte _lives;
         private bool _doubleShot;
         private ImageBrush _spriteShoot;
-        MessageDialog GameOver = new MessageDialog("You have Failed Earth Comrade!");
         
 
         public byte Lives
@@ -38,12 +36,10 @@ namespace SpaceInvaders.Characters
             _obj.Fill = _spriteShoot;
         }
 
-        public async override void OnDestruction()
+        public override void OnDestruction()
         {
             --_lives;
             //TODO: when you die
-            base.OnDestruction();
-            await GameOver.ShowAsync();
         }
 
         public void OnPowerUp(Effect type)
