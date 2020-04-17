@@ -25,14 +25,12 @@ namespace SpaceInvaders
         private List<PowerUp> _powerUps;
         private PlayerTurret _player;
         private Canvas _canvas;
-        private List<ImageBrush> _enemysprite;
 
         public PlayerTurret Player
         { get { return _player; } }
 
         public SpaceInvaders(ref PlayerTurret playerTurret, Canvas canvas)
         {
-            _enemysprite = new List<ImageBrush>();
             _targets = new List<CharInstance>();
             _enemies = new List<Enemy>();
             _bullets = new List<Projectile>();
@@ -41,24 +39,26 @@ namespace SpaceInvaders
             _canvas = canvas;
         }
 
-        public void setup(Rectangle enemyCopy)
+        public void setup()
         {
-
-        }
-
-        private Enemy CreateEnemy()
-        {
-            for (skins = 0; skins >= 4; skins++)
+            for (skins = 0; skins >= 4; ++skins)
             {
-                for (rows = 0; rows >= 4; rows++)
+                for (rows = 0; rows >= 4; ++rows)
                 {
-                   _enemysprite.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyRed5.png")) }); // Orange
-                   _enemysprite.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyGreen2.png")) }); // Green
-                   _enemysprite.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlue4.png")) }); // Blue
-                   _enemysprite.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlack3.png")) }); // Black
+
                 }
             }
-            return null;
+        }
+
+        private Enemy CreateEnemy(Rectangle enemyCopy, double xStart, double yStart, ImageBrush sprite)
+        {
+            Rectangle projection = new Rectangle();
+            projection.Width = enemyCopy.Width;
+            projection.Height = enemyCopy.Height;
+            projection.Fill = sprite;
+
+            Enemy enemy = new Enemy(xStart, yStart, sprite.ImageSource as BitmapImage, projection);
+            return enemy;
         }
 
         public void PlayerShoot(Rectangle missileCopy)
