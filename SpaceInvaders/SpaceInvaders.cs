@@ -21,7 +21,6 @@ namespace SpaceInvaders
         private const double ENEMY_PLACEMENT_BUFFER = 8;
         private byte _score;
 
-
         private EnemyDirection _direction;
         private double _enemyWidth;
         private bool _goLeft;
@@ -32,6 +31,7 @@ namespace SpaceInvaders
         private List<Projectile> _bullets;
         private List<PowerUp> _powerUps;
         private PlayerTurret _player;
+        private Enemy _enemy;
         private Canvas _canvas;
 
         public PlayerTurret Player
@@ -93,6 +93,15 @@ namespace SpaceInvaders
             _bullets.Add(missile);
         }
 
+        /*
+        public void EnemyShoot(Rectangle laserCopy)
+        {
+            Projectile laser = CreateMissile(laserCopy, _enemy);
+            _enemy.EnemyShoot();
+            laser.Move();
+            _canvas.Children.Add(laser.Obj);
+            _bullets.Add(laser);
+        }*/
 
         private Projectile CreateMissile(Rectangle missileCopy, CharInstance shooter)
         {

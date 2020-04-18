@@ -35,6 +35,7 @@ namespace SpaceInvaders.Characters
         {
             _obj.Fill = _spriteShoot;
         }
+        
 
         public override void OnDestruction()
         {

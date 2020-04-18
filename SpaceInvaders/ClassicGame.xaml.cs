@@ -63,7 +63,8 @@ namespace SpaceInvaders
             this.InitializeComponent();
             Window.Current.CoreWindow.KeyDown += KeyPress; // input
             SoundLoader();
-            //musicplayer.Play(); // UNCOMMENT FOR LOUD MUSIC
+            musicplayer.Volume = 0.3; //0.5 is default
+            musicplayer.Play(); // UNCOMMENT FOR LOUD MUSIC
             SpriteLoader();
             TimerSetup();
             GameSetup();
@@ -137,7 +138,6 @@ namespace SpaceInvaders
             soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/laser3.ogg"));
             soundplayer.Play();
         }
-
         private void KeyPress(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
 
