@@ -39,7 +39,6 @@ namespace SpaceInvaders
         // Field Variables
         bool _canFire;
         byte _counter;
-        byte _score;
 
         // Objects
         double _position;
@@ -115,7 +114,7 @@ namespace SpaceInvaders
 
             ++_counter;
         }
-
+        
         private void EnemyCreation()
         {
             _game.EnemySetup(_imgEnemies, _enemy);

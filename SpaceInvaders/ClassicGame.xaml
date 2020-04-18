@@ -50,7 +50,10 @@
             </Rectangle>
         </Canvas>
         <Image x:Name="_face" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" FocusVisualPrimaryBrush="{x:Null}" Source="/Assets/Face Grin.png" Margin="0,0,0,20"/>
-        <TextBlock x:Name="_gameover" Text="you failed to save the earth Comrade!" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="100" TextAlignment="Center" FontSize="23" Visibility="Collapsed"/>
-        <TextBlock x:Name="_win" Text="you saved the earth Comrade!" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="100" TextAlignment="Center" FontSize="23" Visibility="Collapsed"/>
+        <TextBlock x:Name="_gameover" Text="You Failed to Save the Earth Comrade!" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="100" TextAlignment="Center" FontSize="23" Visibility="Collapsed"/>
+        <TextBlock x:Name="_win" Text="You Saved the Earth Comrade!" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="100" TextAlignment="Center" FontSize="23" Visibility="Collapsed"/>
+        <Border Grid.Row="0" Grid.Column="3" Background="White" Width="200" Height="100" HorizontalAlignment="Left">
+            <TextBlock x:Name="_GameScore" Text="Score: " FontSize="25" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black"/>
+        </Border>
     </Grid>
 </Page>

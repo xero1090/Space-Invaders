@@ -19,6 +19,8 @@ namespace SpaceInvaders
         private const sbyte DEFAULT_LASER_SPEED = 20;
         private const byte DEFAULT_ENEMY_COLUMNS = 10;
         private const double ENEMY_PLACEMENT_BUFFER = 8;
+        private byte _score;
+
 
         private EnemyDirection _direction;
         private double _enemyWidth;
@@ -255,13 +257,13 @@ namespace SpaceInvaders
                 if (CollideCheck(bullet, _enemies[index]))
                 {
                     _enemies[index].OnDestruction();
-                    _enemies.RemoveAt(index);
+                    _enemies.RemoveAt(index); 
+                    _score += 10;
                     return true;
                 }
             }
             return false;
         }
-
         private bool CollideCheck(Projectile projectile, CharInstance character)
         {
             bool yCollision = false;
