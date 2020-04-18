@@ -19,17 +19,17 @@ namespace SpaceInvaders.Characters
 
 	public class Enemy : CharInstance
 	{
-        private ImageBrush _enemyShoot;
+        //private ImageBrush _enemyShoot;
 
-        public Enemy(double xStart, double yStart, BitmapImage enemySprite, ImageBrush enemyShoot, Rectangle obj) : base(xStart, yStart, obj)
+        public Enemy(double xStart, double yStart, BitmapImage enemySprite,  Rectangle obj) : base(xStart, yStart, obj)
 		{
-            _enemyShoot = enemyShoot;
+            //_enemyShoot = enemyShoot;
 			base._sprite = enemySprite;
 		}
 
         public void EnemyShoot()
         {
-                _obj.Fill = _enemyShoot;
+               // _obj.Fill = _enemyShoot;
         }
 
 		public override void OnDestruction()
