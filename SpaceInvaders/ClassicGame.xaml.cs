@@ -113,6 +113,7 @@ namespace SpaceInvaders
                 _win.Visibility = 0;
             }
 
+            _score.Text = $"{_game.Score}";
             ++_counter;
         }
         

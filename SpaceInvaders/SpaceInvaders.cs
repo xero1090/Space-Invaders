@@ -19,8 +19,8 @@ namespace SpaceInvaders
         private const sbyte DEFAULT_LASER_SPEED = 20;
         private const byte DEFAULT_ENEMY_COLUMNS = 10;
         private const double ENEMY_PLACEMENT_BUFFER = 8;
-        private byte _score;
-
+        
+        private uint _score;
         private EnemyDirection _direction;
         private double _enemyWidth;
         private bool _goLeft;
@@ -31,7 +31,6 @@ namespace SpaceInvaders
         private List<Projectile> _bullets;
         private List<PowerUp> _powerUps;
         private PlayerTurret _player;
-        private Enemy _enemy;
         private Canvas _canvas;
 
         public PlayerTurret Player
@@ -39,6 +38,9 @@ namespace SpaceInvaders
 
         public List<Enemy> Enemies
         { get { return _enemies; } }
+
+        public uint Score
+        { get { return _score; } }
 
         public SpaceInvaders(ref PlayerTurret playerTurret, Canvas canvas, double enemyWidth)
         {
@@ -52,6 +54,7 @@ namespace SpaceInvaders
             _goLeft = false;
             _skip = false;
             _enemyWidth = enemyWidth;
+            _score = 0;
         }
 
         public void EnemySetup( List<ImageBrush> shipSprites, Rectangle enemyCopy)
@@ -268,6 +271,10 @@ namespace SpaceInvaders
                     _enemies[index].OnDestruction();
                     _enemies.RemoveAt(index); 
                     _score += 10;
+                    if (_enemies.Count == 0)
+                    {
+                        _score = _score*2;
+                    }
                     return true;
                 }
             }
