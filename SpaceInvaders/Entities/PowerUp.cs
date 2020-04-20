@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
-using SpaceInvaders.Characters;
+using Windows.UI.Xaml.Shapes;
 
 namespace SpaceInvaders.Entities
 {
@@ -17,32 +17,29 @@ namespace SpaceInvaders.Entities
         ExtraPoints
     }
 
-    class PowerUp
+    class PowerUp : Interactable
     {
-        private location _location;
+        const byte DEFAULT_FALLING_SPEED = 20;
+
         private Effect _type;
         private BitmapImage _sprite;
 
         public Effect PowerUpType
         { get { return _type; } }
 
-        public location Location
-        { get { return _location; } }
-
         public BitmapImage Sprite
         { get { return _sprite; } set { _sprite = value; } }
 
-        public PowerUp(double xStart, double yStart, Effect type)
+        public PowerUp(double xStart, double yStart, Rectangle obj, Effect type): base(xStart, yStart, obj)
         {
-            _location = new location(xStart, yStart);
             _type = type;
         }
 
-        public PowerUp(double xStart, double yStart) : this(xStart, yStart, Effect.ExtraPoints)
+        public PowerUp(double xStart, double yStart, Rectangle obj) : this(xStart, yStart, obj, Effect.ExtraPoints)
         {
         }
 
-        public void Fall(int yMod)
+        public void Fall(int yMod = DEFAULT_FALLING_SPEED)
         {
             _location.Y += yMod;
         } 

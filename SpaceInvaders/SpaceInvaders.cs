@@ -281,7 +281,7 @@ namespace SpaceInvaders
             }
             return false;
         }
-        private bool CollideCheck(Projectile projectile, CharInstance character)
+        private bool CollideCheck(Interactable projectile, CharInstance character)
         {
             bool yCollision = false;
             bool xCollision = false;

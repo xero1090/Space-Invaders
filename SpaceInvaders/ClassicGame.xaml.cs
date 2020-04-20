@@ -36,7 +36,6 @@ namespace SpaceInvaders
         const byte FIRE_WAIT = 10;
         const byte  DEFAULT_ENEMY_WAIT_MOD = 3;
         const byte DEFAULT_ENEMY_WAIT = 50;
-        const uint ROUND_WAIT = 100000;
 
         // Field Variables
         bool _canFire;
@@ -68,8 +67,9 @@ namespace SpaceInvaders
             this.InitializeComponent();
             Window.Current.CoreWindow.KeyDown += KeyPress; // input
             SoundLoader();
-            musicplayer.Volume = 0.3; //0.5 is default
-            musicplayer.Play(); // UNCOMMENT FOR LOUD MUSIC
+            musicplayer.Volume = 0.2; //0.5 is default
+            soundplayer.Volume = 0.3;
+            musicplayer.Play(); // UNCOMMENT FOR MUSIC
             SpriteLoader();
             TimerSetup();
             GameSetup();
@@ -113,13 +113,6 @@ namespace SpaceInvaders
                 _win.Visibility = Visibility.Visible;
                 _gameOn = false;
                 _counter = 0;
-            }
-
-            if ((!_gameOn) && _counter % ROUND_WAIT == 0)
-            {
-                EndOfRound();
-                _counter = 0;
-                _enemyWait = DEFAULT_ENEMY_WAIT;
             }
 
             if (_counter == 100001)
@@ -214,6 +207,18 @@ namespace SpaceInvaders
                        sender.GetKeyState(Windows.System.VirtualKey.GamepadRightThumbstickRight).HasFlag(CoreVirtualKeyStates.Down)) // Right on the right thumbstick / analogstick (controller)
             {
                 _game.PlayerMove(10);
+            }
+
+            if (sender.GetKeyState(Windows.System.VirtualKey.Enter).HasFlag(CoreVirtualKeyStates.Down) || // Enter Key
+                    sender.GetKeyState(Windows.System.VirtualKey.E).HasFlag(CoreVirtualKeyStates.Down) || // E Key
+                    sender.GetKeyState(Windows.System.VirtualKey.GamepadY).HasFlag(CoreVirtualKeyStates.Down) || // Y button (controller)
+                    sender.GetKeyState(Windows.System.VirtualKey.GamepadB).HasFlag(CoreVirtualKeyStates.Down)) // B button (controller)
+            {
+                if ((!_gameOn))
+                {
+                    EndOfRound();
+                    _enemyWait = DEFAULT_ENEMY_WAIT;
+                }
             }
         }
 

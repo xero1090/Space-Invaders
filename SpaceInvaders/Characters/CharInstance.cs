@@ -6,36 +6,15 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
+using SpaceInvaders;
 
 namespace SpaceInvaders.Characters
 {
-	public struct location
-	{
-		private double _xLocation;
-		private double _yLocation;
-
-		public double X
-		{ get { return _xLocation; } set { _xLocation = value; } }
-		public double Y
-		{ get { return _yLocation; } set { _yLocation = value; } }
-
-		public location(double xLoc, double yLoc)
-		{
-			_xLocation = xLoc;
-			_yLocation = yLoc;
-		}
-	}
-
-	public abstract class CharInstance
+	public abstract class CharInstance : Interactable
 	{
 
-		protected location _location;
 		protected bool _isAlive;
 		protected BitmapImage _sprite;
-		protected Rectangle _obj;
-
-		public location Location
-		{ get { return _location; } }
 
 		public bool IsAlive
 		{ get { return _isAlive; } set { _isAlive = value; } }
@@ -43,20 +22,11 @@ namespace SpaceInvaders.Characters
 		public BitmapImage Sprite
 		{ get { return _sprite; } set { _sprite = value; } }
 
-		public Rectangle Obj
-		{ get { return _obj; } }
-
-		public CharInstance(double xStart, double yStart, Rectangle obj)
+		public CharInstance(double xStart, double yStart, Rectangle obj): base(xStart, yStart, obj)
 		{
 			_location = new location(xStart, yStart);
 			_obj = obj;
 			_isAlive = true;
-		}
-
-		public bool IsHit()
-		{
-			//TODO: figure this crud out
-			return false;
 		}
 
 		public void Move(double xMod, double yMod)

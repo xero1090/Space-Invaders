@@ -47,25 +47,23 @@ namespace SpaceInvaders.Characters
 
         public void OnPowerUp(Effect type)
         {
-            //Red buff: double missile
-            //Yellow buff: Stop enemy movement
+            // Red buff: double missile
             // blue buff: shield
+            // Yellow buff: extra life
             //TODO: implement buffs
-            /*
-              if (redBuff == True)
-                {
-                    idk how to add a second missile beside the normal one
-                }
-              if (blueBuff == True)
-                {
-                    _shield.visibility = 0;
-                    //idk how to keep shield permanently on tank 
-                }
-             if (yellowBuff == True)
-                {
-                    enemies.move == false;
-                }
-            */
+            if (type == Effect.DoubleTap) // Double Missile
+            {
+
+            }
+            if (type == Effect.Shield) // Shield
+            {
+                
+            }
+            if (type == Effect.ExtraLife)
+            {
+
+            }
+
         }
 
     }
