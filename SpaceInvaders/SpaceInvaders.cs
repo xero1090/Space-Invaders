@@ -61,6 +61,7 @@ namespace SpaceInvaders
         {
             Enemy enemyHolder;
             double placementStart = _canvas.Width / 2 - ((DEFAULT_ENEMY_COLUMNS / 2)* (enemyCopy.Width + ENEMY_PLACEMENT_BUFFER));
+            _goLeft = false;
 
             for (byte rows = 0; rows < shipSprites.Count; ++rows)
             {

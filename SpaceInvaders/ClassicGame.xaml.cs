@@ -36,11 +36,12 @@ namespace SpaceInvaders
         const byte FIRE_WAIT = 10;
         const byte  DEFAULT_ENEMY_WAIT_MOD = 3;
         const byte DEFAULT_ENEMY_WAIT = 50;
+        const uint ROUND_WAIT = 100000;
 
         // Field Variables
         bool _canFire;
         bool _gameOn;
-        byte _counter;
+        uint _counter;
         byte _enemyWait;
         byte _enemyMOD;
 
@@ -100,29 +101,43 @@ namespace SpaceInvaders
                 _tank.Fill = _imgTank;
             }
 
-            if (_counter == 201)
-            {
-                _counter = 0;
-            }
-
             if (_game.Player.Lives == 0)
             {
                 // Player Dies
-                _gameover.Visibility = 0;
-                _gameOn = false;
+                _gameover.Visibility = Visibility.Visible;
             }
 
             if (_game.Enemies.Count == 0)
             {
                 // All Aliens Die
-                _win.Visibility = 0;
+                _win.Visibility = Visibility.Visible;
                 _gameOn = false;
+                _counter = 0;
             }
 
+            if ((!_gameOn) && _counter % ROUND_WAIT == 0)
+            {
+                EndOfRound();
+                _counter = 0;
+                _enemyWait = DEFAULT_ENEMY_WAIT;
+            }
+
+            if (_counter == 100001)
+            {
+                _counter = 0;
+            }
             _score.Text = $"{_game.Score}";
             ++_counter;
         }
         
+        private void EndOfRound()
+        {
+            _win.Visibility = Visibility.Collapsed;
+            _game.Enemies.Clear();
+            EnemyCreation();
+            _gameOn = true;
+        }
+
         private void EnemyCreation(bool firstTime = false)
         {
             _game.EnemySetup(_imgEnemies, _enemy);
