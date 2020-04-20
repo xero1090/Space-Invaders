@@ -34,11 +34,15 @@ namespace SpaceInvaders
         // Constants
         const int INTERVAL = 10;
         const byte FIRE_WAIT = 10;
-        const byte ENEMY_MOVE_WAIT = 50;
+        const byte  DEFAULT_ENEMY_WAIT_MOD = 3;
+        const byte DEFAULT_ENEMY_WAIT = 50;
 
         // Field Variables
         bool _canFire;
-        byte _counter;
+        bool _gameOn;
+        uint _counter;
+        byte _enemyWait;
+        byte _enemyMOD;
 
         // Objects
         double _position;
@@ -63,8 +67,9 @@ namespace SpaceInvaders
             this.InitializeComponent();
             Window.Current.CoreWindow.KeyDown += KeyPress; // input
             SoundLoader();
-            musicplayer.Volume = 0.3; //0.5 is default
-            musicplayer.Play(); // UNCOMMENT FOR LOUD MUSIC
+            musicplayer.Volume = 0.2; //0.5 is default
+            soundplayer.Volume = 0.3;
+            musicplayer.Play(); // UNCOMMENT FOR MUSIC
             SpriteLoader();
             TimerSetup();
             GameSetup();
@@ -79,9 +84,10 @@ namespace SpaceInvaders
         {
             _game.BulletCheck(_imgExplode);
 
-            if (_counter % ENEMY_MOVE_WAIT == 0)
+            if (_counter % _enemyWait == 0)
             {
                 _game.EnemyMove(); //UNCOMMENT FOR MOVEMENT
+                EnemySpeed();
             }
 
             if (_counter%FIRE_WAIT == 0)
@@ -95,30 +101,59 @@ namespace SpaceInvaders
                 _tank.Fill = _imgTank;
             }
 
-            if (_counter == 201)
-            {
-                _counter = 0;
-            }
-
             if (_game.Player.Lives == 0)
             {
                 // Player Dies
-                _gameover.Visibility = 0;
-                //enemies.move = false;
+                _gameover.Visibility = Visibility.Visible;
             }
 
             if (_game.Enemies.Count == 0)
             {
                 // All Aliens Die
-                _win.Visibility = 0;
+                _win.Visibility = Visibility.Visible;
+                _gameOn = false;
+                _counter = 0;
             }
 
+            if (_counter == 100001)
+            {
+                _counter = 0;
+            }
+            _score.Text = $"{_game.Score}";
             ++_counter;
         }
         
-        private void EnemyCreation()
+        private void EndOfRound()
+        {
+            _win.Visibility = Visibility.Collapsed;
+            _game.Enemies.Clear();
+            EnemyCreation();
+            _gameOn = true;
+        }
+
+        private void EnemyCreation(bool firstTime = false)
         {
             _game.EnemySetup(_imgEnemies, _enemy);
+            if (!firstTime)
+            {
+                --_enemyMOD;
+            }
+        }
+
+        private void EnemySpeed()
+        {
+            _enemyWait = (byte) ( _game.Enemies.Count * _enemyMOD);
+
+            if (_enemyWait > DEFAULT_ENEMY_WAIT)
+            {
+                _enemyWait = DEFAULT_ENEMY_WAIT;
+            }
+
+            // Avoiding destroying the world by dividing 
+            if (_enemyWait == 0)
+            {
+                _enemyWait = 1;
+            }
         }
 
         private void PlayerMissile_fired()
@@ -174,6 +209,18 @@ namespace SpaceInvaders
             {
                 _game.PlayerMove(10);
             }
+
+            if (sender.GetKeyState(Windows.System.VirtualKey.Enter).HasFlag(CoreVirtualKeyStates.Down) || // Enter Key
+                    sender.GetKeyState(Windows.System.VirtualKey.E).HasFlag(CoreVirtualKeyStates.Down) || // E Key
+                    sender.GetKeyState(Windows.System.VirtualKey.GamepadY).HasFlag(CoreVirtualKeyStates.Down) || // Y button (controller)
+                    sender.GetKeyState(Windows.System.VirtualKey.GamepadB).HasFlag(CoreVirtualKeyStates.Down)) // B button (controller)
+            {
+                if ((!_gameOn))
+                {
+                    EndOfRound();
+                    _enemyWait = DEFAULT_ENEMY_WAIT;
+                }
+            }
         }
 
         private void SpriteLoader()
@@ -218,7 +265,10 @@ namespace SpaceInvaders
             _game = new SpaceInvaders(ref _playerTurret, _canvas, _enemy.Width);
             _canFire = true;
             _counter = 1;
-            EnemyCreation();
+            _enemyMOD = DEFAULT_ENEMY_WAIT_MOD;
+            EnemyCreation(true);
+            EnemySpeed();
+            _gameOn = true;
         }
     }
 }

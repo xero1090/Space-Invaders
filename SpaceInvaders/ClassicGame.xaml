@@ -5,9 +5,9 @@
     xmlns:local="using:SpaceInvaders"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Background="White">
 
-    <Grid x:Name="_grid" Background="#FF1E472F">
+    <Grid x:Name="_grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="4*" />
@@ -52,8 +52,7 @@
         <Image x:Name="_face" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" FocusVisualPrimaryBrush="{x:Null}" Source="/Assets/Face Grin.png" Margin="0,0,0,20"/>
         <TextBlock x:Name="_gameover" Text="You Failed to Save the Earth Comrade!" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="100" TextAlignment="Center" FontSize="23" Visibility="Collapsed"/>
         <TextBlock x:Name="_win" Text="You Saved the Earth Comrade!" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="100" TextAlignment="Center" FontSize="23" Visibility="Collapsed"/>
-        <Border Grid.Row="0" Grid.Column="3" Background="White" Width="200" Height="100" HorizontalAlignment="Left">
-            <TextBlock x:Name="_GameScore" Text="Score: " FontSize="25" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black"/>
-        </Border>
+        <TextBlock Text="Score:" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" Grid.Column="2" Margin="10,0,0,0"/>
+        <TextBlock x:Name="_score" Text="0" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" Grid.Column="2" Margin="100,0,0,0"/>
     </Grid>
 </Page>
