@@ -34,11 +34,15 @@ namespace SpaceInvaders
         // Constants
         const int INTERVAL = 10;
         const byte FIRE_WAIT = 10;
-        const byte ENEMY_MOVE_WAIT = 50;
+        const byte  DEFAULT_ENEMY_WAIT_MOD = 3;
+        const byte DEFAULT_ENEMY_WAIT = 50;
 
         // Field Variables
         bool _canFire;
+        bool _gameOn;
         byte _counter;
+        byte _enemyWait;
+        byte _enemyMOD;
 
         // Objects
         double _position;
@@ -79,9 +83,10 @@ namespace SpaceInvaders
         {
             _game.BulletCheck(_imgExplode);
 
-            if (_counter % ENEMY_MOVE_WAIT == 0)
+            if (_counter % _enemyWait == 0)
             {
                 _game.EnemyMove(); //UNCOMMENT FOR MOVEMENT
+                EnemySpeed();
             }
 
             if (_counter%FIRE_WAIT == 0)
@@ -104,22 +109,43 @@ namespace SpaceInvaders
             {
                 // Player Dies
                 _gameover.Visibility = 0;
-                //enemies.move = false;
+                _gameOn = false;
             }
 
             if (_game.Enemies.Count == 0)
             {
                 // All Aliens Die
                 _win.Visibility = 0;
+                _gameOn = false;
             }
 
             _score.Text = $"{_game.Score}";
             ++_counter;
         }
         
-        private void EnemyCreation()
+        private void EnemyCreation(bool firstTime = false)
         {
             _game.EnemySetup(_imgEnemies, _enemy);
+            if (!firstTime)
+            {
+                --_enemyMOD;
+            }
+        }
+
+        private void EnemySpeed()
+        {
+            _enemyWait = (byte) ( _game.Enemies.Count * _enemyMOD);
+
+            if (_enemyWait > DEFAULT_ENEMY_WAIT)
+            {
+                _enemyWait = DEFAULT_ENEMY_WAIT;
+            }
+
+            // Avoiding destroying the world by dividing 
+            if (_enemyWait == 0)
+            {
+                _enemyWait = 1;
+            }
         }
 
         private void PlayerMissile_fired()
@@ -218,7 +244,10 @@ namespace SpaceInvaders
             _game = new SpaceInvaders(ref _playerTurret, _canvas, _enemy.Width);
             _canFire = true;
             _counter = 1;
-            EnemyCreation();
+            _enemyMOD = DEFAULT_ENEMY_WAIT_MOD;
+            EnemyCreation(true);
+            EnemySpeed();
+            _gameOn = true;
         }
     }
 }
