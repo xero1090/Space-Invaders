@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
 
@@ -30,12 +31,15 @@ namespace SpaceInvaders.Entities
         public BitmapImage Sprite
         { get { return _sprite; } set { _sprite = value; } }
 
-        public PowerUp(double xStart, double yStart, Rectangle obj, Effect type): base(xStart, yStart)
+        public PowerUp(double xStart, double yStart, Effect type, ImageBrush sprite, Rectangle powerUpCopy): base(xStart, yStart)
         {
             _type = type;
+            _obj.Fill = sprite;
+            _obj.Width = powerUpCopy.Width;
+            _obj.Height = powerUpCopy.Height;
         }
 
-        public PowerUp(double xStart, double yStart, Rectangle obj) : this(xStart, yStart, obj, Effect.ExtraPoints)
+        public PowerUp(double xStart, double yStart, ImageBrush sprite, Rectangle powerUpCopy) : this(xStart, yStart, Effect.ExtraPoints, sprite, powerUpCopy)
         {
         }
 

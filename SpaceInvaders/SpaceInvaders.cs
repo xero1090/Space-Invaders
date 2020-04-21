@@ -67,22 +67,11 @@ namespace SpaceInvaders
             {
                 for (byte columns = 0; columns < DEFAULT_ENEMY_COLUMNS; ++columns)
                 {
-                     enemyHolder = (CreateEnemy(enemyCopy, placementStart + (columns * (enemyCopy.Width + ENEMY_PLACEMENT_BUFFER)), rows*(enemyCopy.Height + ENEMY_PLACEMENT_BUFFER), shipSprites[rows]));
+                     enemyHolder = new Enemy(placementStart + (columns * (enemyCopy.Width + ENEMY_PLACEMENT_BUFFER)), rows*(enemyCopy.Height + ENEMY_PLACEMENT_BUFFER), shipSprites[rows], enemyCopy);
                     _canvas.Children.Add(enemyHolder.Obj);
                     _enemies.Add(enemyHolder);
                 }
             }
-        }
-
-        private Enemy CreateEnemy(Rectangle enemyCopy, double xStart, double yStart, ImageBrush sprite)
-        {
-            Enemy enemy = new Enemy(xStart, yStart, sprite, enemyCopy);
-            return enemy;
-        }
-
-        private PowerUp CreatePowerUp(Rectangle enemyCopy, double xStart, double yStart, ImageBrush sprite)
-        {
-            return null;
         }
 
         public void PlayerShoot(Rectangle missileCopy)
