@@ -126,6 +126,9 @@
     <Compile Include="Classic.xaml.cs">
       <DependentUpon>Classic.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ClassicBoss.xaml.cs">
+      <DependentUpon>ClassicBoss.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ClassicGame.xaml.cs">
       <DependentUpon>ClassicGame.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,7 @@
     <Content Include="Assets\background.png" />
     <Content Include="Assets\background1.png" />
     <Content Include="Assets\begin.ogg" />
+    <Content Include="Assets\Boss.png" />
     <Content Include="Assets\ClassicBackground.png" />
     <Content Include="Assets\shield.png" />
     <Content Include="Assets\Sounds\Boss.mp3" />
@@ -195,6 +199,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Classic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ClassicBoss.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
