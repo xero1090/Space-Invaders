@@ -170,6 +170,7 @@ namespace SpaceInvaders
         }
         private void EnemyMissile_fired()
         {
+         // _game.EnemyShoot(_laser);
             soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/laser3.ogg"));
             soundplayer.Play();
         }
