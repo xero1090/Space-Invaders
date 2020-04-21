@@ -52,12 +52,6 @@
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle x:Name="_shield" Height="135" Canvas.Left="243" Canvas.Top="270" Width="155" Visibility="Collapsed">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="/Assets/shield.png"/>
-                </Rectangle.Fill>
-            </Rectangle>
-            
             <Rectangle x:Name="_powerUp" Height="25" Width="25" Visibility="Collapsed">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/Powerups/powerupRed_bolt.png"/>

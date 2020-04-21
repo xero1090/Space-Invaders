@@ -14,8 +14,6 @@ namespace SpaceInvaders.Entities
     enum Effect
     {
         ExtraLife = 1,
-        DoubleTap,
-        Shield,
         ExtraPoints
     }
 
@@ -52,7 +50,8 @@ namespace SpaceInvaders.Entities
 
         public void Contact()
         {
-            // TODO: Do something when it connects with something
+            _obj.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            _obj = null;
         }
     }
 }

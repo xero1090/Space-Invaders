@@ -48,7 +48,6 @@ namespace SpaceInvaders.Characters
             if (!_hasShield)
             {
                 --_lives;
-                //TODO: when you die
 
             }
             else
@@ -57,25 +56,9 @@ namespace SpaceInvaders.Characters
             }
         }
 
-        public void OnPowerUp(Effect type)
+        public void LifeUp()
         {
-            // Red buff: double missile
-            // blue buff: shield
-            // Yellow buff: extra life
-            //TODO: implement buffs
-            if (type == Effect.DoubleTap) // Double Missile
-            {
-                _doubleShot = true;
-            }
-            if (type == Effect.Shield) // Shield
-            {
-                _hasShield = true;
-            }
-            if (type == Effect.ExtraLife)
-            {
-                ++_lives;
-            }
-
+            ++Lives;
         }
 
     }

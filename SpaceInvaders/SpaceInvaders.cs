@@ -20,6 +20,7 @@ namespace SpaceInvaders
         private const byte DEFAULT_ENEMY_COLUMNS = 10;
         private const double ENEMY_PLACEMENT_BUFFER = 8;
         private const double POWERUP_DROP_CHANCE = 0.01; // Chance every enemy drops a powerUp
+        private const int SCORE_BONUS = 50;
         
         private uint _score;
         private location _lastKill;
@@ -295,6 +296,26 @@ namespace SpaceInvaders
             return false;
         }
 
+        public void PowerUpGet()
+        {
+            for (int index = 0; index < _powerUps.Count; ++index)
+            {
+                if (CollideCheck(_powerUps[index], _player))
+                {
+                    if (_powerUps[index].PowerUpType == Effect.ExtraLife)
+                    {
+                        _player.LifeUp();
+                    }
+                    else
+                    {
+                        _score += SCORE_BONUS;
+                    }
+
+                    _powerUps[index].Contact();
+                    _powerUps.RemoveAt(index);             
+                }
+            }
+        }
 
         private bool CollideCheck(Interactable projectile, Interactable character)
         {

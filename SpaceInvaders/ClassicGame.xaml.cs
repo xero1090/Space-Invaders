@@ -95,6 +95,7 @@ namespace SpaceInvaders
             if (_counter % WAIT == 0)
             {
                 _game.PowerUpMove(); //UNCOMMENT FOR POWERUP FALLING
+                _game.PowerUpGet();
             }
 
             if (_counter%FIRE_WAIT == 0)
@@ -250,8 +251,6 @@ namespace SpaceInvaders
 
             _imgPowerUps = new List<ImageBrush>();
             _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupYellow_bolt.png")) }); // Extra Life
-            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupRed_bolt.png")) }); // Double Tap
-            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupBlue_bolt.png")) }); // Shield
             _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupGreen_bolt.png")) }); // Extra Points
         }
 
