@@ -40,7 +40,7 @@ namespace SpaceInvaders
         // Field Variables
         bool _canFire;
         bool _gameOn;
-        uint _counter;
+        byte _counter;
         byte _enemyWait;
         byte _enemyMOD;
 
@@ -115,7 +115,7 @@ namespace SpaceInvaders
                 _counter = 0;
             }
 
-            if (_counter == 100001)
+            if (_counter == 201)
             {
                 _counter = 0;
             }

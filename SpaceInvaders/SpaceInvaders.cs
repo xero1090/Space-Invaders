@@ -76,16 +76,13 @@ namespace SpaceInvaders
 
         private Enemy CreateEnemy(Rectangle enemyCopy, double xStart, double yStart, ImageBrush sprite)
         {
-            Rectangle projection = new Rectangle();
-            projection.Width = enemyCopy.Width;
-            projection.Height = enemyCopy.Height;
-            projection.Fill = sprite;
-            projection.Visibility = Windows.UI.Xaml.Visibility.Visible;
-            projection.SetValue(Canvas.TopProperty, yStart);
-            projection.SetValue(Canvas.LeftProperty, xStart);
-
-            Enemy enemy = new Enemy(xStart, yStart, sprite.ImageSource as BitmapImage, projection);
+            Enemy enemy = new Enemy(xStart, yStart, sprite, enemyCopy);
             return enemy;
+        }
+
+        private PowerUp CreatePowerUp(Rectangle enemyCopy, double xStart, double yStart, ImageBrush sprite)
+        {
+            return null;
         }
 
         public void PlayerShoot(Rectangle missileCopy)
@@ -111,22 +108,15 @@ namespace SpaceInvaders
         {
             sbyte velocity = DEFAULT_LASER_SPEED;
 
-            // copying the missile
-            Rectangle projection = new Rectangle();
-            projection.Width = missileCopy.Width;
-            projection.Height = missileCopy.Height;
-            projection.Fill = missileCopy.Fill;
-            projection.SetValue(Canvas.TopProperty, (double)shooter.Obj.GetValue(Canvas.TopProperty) - projection.Height / 1.5);
-            projection.SetValue(Canvas.LeftProperty, (double)shooter.Obj.GetValue(Canvas.LeftProperty) + (shooter.Obj.Width / 2 - projection.Width / 2));
-            projection.Visibility = Windows.UI.Xaml.Visibility.Visible;
-
             if (shooter.GetType() == _player.GetType())
             {
                 velocity = DEFAULT_MISSILE_SPEED;
             }
 
             // creating the projectile
-            Projectile missile = new Projectile(shooter.Location.X, shooter.Location.Y, 0, velocity, projection);
+            Projectile missile = new Projectile(shooter.Location.X + shooter.Obj.Width / 2, shooter.Location.Y, 0, velocity, missileCopy);
+            missile.Obj.SetValue(Canvas.TopProperty, (double)shooter.Obj.GetValue(Canvas.TopProperty) - missile.Obj.Height / 1.5);
+            missile.Obj.SetValue(Canvas.LeftProperty, (double)shooter.Obj.GetValue(Canvas.LeftProperty) + (shooter.Obj.Width / 2 - missile.Obj.Width / 2));
 
             return missile;
         }
@@ -281,7 +271,7 @@ namespace SpaceInvaders
             }
             return false;
         }
-        private bool CollideCheck(Interactable projectile, CharInstance character)
+        private bool CollideCheck(Interactable projectile, Interactable character)
         {
             bool yCollision = false;
             bool xCollision = false;
@@ -297,11 +287,11 @@ namespace SpaceInvaders
             }
 
             // checking x axis
-            if (projectile.Location.X >= character.Location.X - character.Obj.Width && projectile.Location.X <= character.Location.X) // Checking left most point
+            if (projectile.Location.X >= character.Location.X && projectile.Location.X <= character.Location.X + character.Obj.Width) // Checking left most point
             {
                 xCollision = true;
             }
-            if (projectile.Location.X + projectile.Obj.Width >= character.Location.X - character.Obj.Width && projectile.Location.X + projectile.Obj.Width <= character.Location.X) // Checking right most point
+            if (projectile.Location.X + projectile.Obj.Width >= character.Location.X && projectile.Location.X + projectile.Obj.Width <= character.Location.X + character.Obj.Width) // Checking right most point
             {
                 xCollision = true;
             }

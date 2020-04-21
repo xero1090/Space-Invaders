@@ -28,10 +28,13 @@ namespace SpaceInvaders.Entities
         public MissileState State
         { get { return _state; } }
 
-        public Projectile(double xStart, double yStart, double xMod, double yMod, Rectangle obj): base (xStart, yStart, obj)
+        public Projectile(double xStart, double yStart, double xMod, double yMod, Rectangle missileCopy): base (xStart, yStart)
         {
             _modifier = new double[] { xMod, yMod };
             _state = MissileState.Intact;
+            _obj.Width = missileCopy.Width;
+            _obj.Height = missileCopy.Height;
+            _obj.Fill = missileCopy.Fill;
         }
 
         public void Move()

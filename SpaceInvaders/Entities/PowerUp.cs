@@ -30,7 +30,7 @@ namespace SpaceInvaders.Entities
         public BitmapImage Sprite
         { get { return _sprite; } set { _sprite = value; } }
 
-        public PowerUp(double xStart, double yStart, Rectangle obj, Effect type): base(xStart, yStart, obj)
+        public PowerUp(double xStart, double yStart, Rectangle obj, Effect type): base(xStart, yStart)
         {
             _type = type;
         }

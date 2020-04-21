@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
@@ -19,17 +20,17 @@ namespace SpaceInvaders.Characters
 
 	public class Enemy : CharInstance
 	{
-        //private ImageBrush _enemyShoot;
 
-        public Enemy(double xStart, double yStart, BitmapImage enemySprite,  Rectangle obj) : base(xStart, yStart, obj)
+        public Enemy(double xStart, double yStart, ImageBrush enemySprite, Rectangle enemyCopy) : base(xStart, yStart)
 		{
-            //_enemyShoot = enemyShoot;
-			base._sprite = enemySprite;
+			base._sprite = enemySprite.ImageSource as BitmapImage;
+			_obj.Width = enemyCopy.Width;
+			_obj.Height = enemyCopy.Height;
+			_obj.Fill = enemySprite;
 		}
 
         public void EnemyShoot()
         {
-               // _obj.Fill = _enemyShoot;
         }
 
 		public override void OnDestruction()

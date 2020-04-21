@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Shapes;
 
 namespace SpaceInvaders
@@ -36,10 +37,13 @@ namespace SpaceInvaders
         public Rectangle Obj
         { get { return _obj; } }
 
-        public Interactable(double xStart, double yStart, Rectangle obj)
+        public Interactable(double xStart, double yStart)
         {
             _location = new location(xStart, yStart);
-            _obj = obj;
+            _obj = new Rectangle();
+            _obj.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            _obj.SetValue(Canvas.TopProperty, yStart);
+            _obj.SetValue(Canvas.LeftProperty, xStart);
         }
 
     }

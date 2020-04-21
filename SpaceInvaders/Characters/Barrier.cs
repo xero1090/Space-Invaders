@@ -10,7 +10,7 @@ namespace SpaceInvaders.Characters
 {
     class Barrier : CharInstance
     {
-        public Barrier(double xStart, double yStart, BitmapImage sprite, Rectangle obj): base(xStart, yStart, obj)
+        public Barrier(double xStart, double yStart, BitmapImage sprite, Rectangle obj): base(xStart, yStart)
         {
             base.Sprite = sprite;
         }

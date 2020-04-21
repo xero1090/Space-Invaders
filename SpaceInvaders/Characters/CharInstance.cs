@@ -22,10 +22,9 @@ namespace SpaceInvaders.Characters
 		public BitmapImage Sprite
 		{ get { return _sprite; } set { _sprite = value; } }
 
-		public CharInstance(double xStart, double yStart, Rectangle obj): base(xStart, yStart, obj)
+		public CharInstance(double xStart, double yStart): base(xStart, yStart)
 		{
 			_location = new location(xStart, yStart);
-			_obj = obj;
 			_isAlive = true;
 		}
 

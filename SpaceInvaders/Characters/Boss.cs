@@ -10,7 +10,7 @@ namespace SpaceInvaders.Characters
 {
     class Boss : CharInstance
     {
-        public Boss(double xStart, double yStart, BitmapImage bossSprite, Rectangle obj) : base(xStart, yStart, obj)
+        public Boss(double xStart, double yStart, BitmapImage bossSprite, Rectangle obj) : base(xStart, yStart)
         {
             base._sprite = bossSprite;
         }
