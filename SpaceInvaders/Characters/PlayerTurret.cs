@@ -45,10 +45,16 @@ namespace SpaceInvaders.Characters
 
         public override void OnDestruction()
         {
-            --_lives;
-            //TODO: when you die
-            
+            if (!_hasShield)
+            {
+                --_lives;
+                //TODO: when you die
 
+            }
+            else
+            {
+                _hasShield = false;
+            }
         }
 
         public void OnPowerUp(Effect type)

@@ -57,6 +57,7 @@
                     <ImageBrush ImageSource="/Assets/shield.png"/>
                 </Rectangle.Fill>
             </Rectangle>
+            
             <Rectangle x:Name="_powerUp" Height="25" Width="25" Visibility="Collapsed">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/Powerups/powerupRed_bolt.png"/>

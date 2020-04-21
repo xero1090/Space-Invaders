@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
@@ -43,9 +44,10 @@ namespace SpaceInvaders.Entities
         {
         }
 
-        public void Fall(int yMod = DEFAULT_FALLING_SPEED)
+        public void Fall(double yMod = DEFAULT_FALLING_SPEED)
         {
             _location.Y += yMod;
+            _obj.SetValue(Canvas.TopProperty, (double) _obj.GetValue(Canvas.TopProperty) + (double) yMod);
         } 
 
         public void Contact()

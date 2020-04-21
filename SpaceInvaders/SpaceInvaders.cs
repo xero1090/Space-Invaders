@@ -19,12 +19,15 @@ namespace SpaceInvaders
         private const sbyte DEFAULT_LASER_SPEED = 20;
         private const byte DEFAULT_ENEMY_COLUMNS = 10;
         private const double ENEMY_PLACEMENT_BUFFER = 8;
+        private const double POWERUP_DROP_CHANCE = 0.01; // Chance every enemy drops a powerUp
         
         private uint _score;
+        private location _lastKill;
         private EnemyDirection _direction;
         private double _enemyWidth;
         private bool _goLeft;
         private bool _skip;
+        private Random _rand;
 
         private List<CharInstance> _targets;
         private List<Enemy> _enemies;
@@ -42,6 +45,9 @@ namespace SpaceInvaders
         public uint Score
         { get { return _score; } }
 
+        public location LastKill
+        { get { return _lastKill; } }
+
         public SpaceInvaders(ref PlayerTurret playerTurret, Canvas canvas, double enemyWidth)
         {
             _targets = new List<CharInstance>();
@@ -55,6 +61,7 @@ namespace SpaceInvaders
             _skip = false;
             _enemyWidth = enemyWidth;
             _score = 0;
+            _rand = new Random();
         }
 
         public void EnemySetup( List<ImageBrush> shipSprites, Rectangle enemyCopy)
@@ -93,9 +100,21 @@ namespace SpaceInvaders
             _bullets.Add(laser);
         }*/
 
-        public void CreatePowerUp(double xStart, double yStart, Effect type, ImageBrush sprite, Rectangle powerUpCopy)
+        /// <summary>
+        /// Chance of dropping a power up at the most recent kill
+        /// </summary>
+        /// <param name="sprite"></param>
+        /// <param name="powerUpCopy"></param>
+        /// <param name="type"></param>
+        private void CreatePowerUP(List<ImageBrush> sprites, Rectangle powerUpCopy)
         {
-            PowerUp powerUpHolder = new PowerUp(xStart, yStart, sprite, powerUpCopy, type);
+            if (_rand.NextDouble() <= POWERUP_DROP_CHANCE)
+            {
+                Effect type = (Effect)_rand.Next(1, sprites.Count);
+                PowerUp powerUp = new PowerUp(_lastKill.X, _lastKill.Y, sprites[(int)type], powerUpCopy, type);
+                _powerUps.Add(powerUp);
+                _canvas.Children.Add(powerUp.Obj);
+            }
         }
 
         private Projectile CreateMissile(Rectangle missileCopy, CharInstance shooter)
@@ -115,7 +134,7 @@ namespace SpaceInvaders
             return missile;
         }
 
-        public void BulletCheck(ImageBrush explosion)
+        public void BulletCheck(ImageBrush explosion, List<ImageBrush> powerUps, Rectangle powerUpCopy)
         {
             bool hit = false;
             List<Projectile> active = new List<Projectile>();
@@ -128,6 +147,7 @@ namespace SpaceInvaders
                     if (HitAlien(bullet))
                     {
                         hit = true;
+                        CreatePowerUP(powerUps, powerUpCopy);
                     }
                     else if (bullet.Location.Y <= 0)
                     {
@@ -182,6 +202,14 @@ namespace SpaceInvaders
             }
         }
 
+        public void PowerUpMove()
+        {
+            foreach (PowerUp powerUp in _powerUps)
+            {
+                powerUp.Fall();
+            }
+        }
+
         private EnemyDirection WhichDirection()
         {
             double mostLeft = _canvas.Width;
@@ -227,7 +255,6 @@ namespace SpaceInvaders
             return EnemyDirection.Right;
 
         }
-
        
         public void PlayerMove(double xMod)
         {
@@ -254,6 +281,8 @@ namespace SpaceInvaders
                 if (CollideCheck(bullet, _enemies[index]))
                 {
                     _enemies[index].OnDestruction();
+                    _lastKill.X = _enemies[index].Location.X;
+                    _lastKill.Y = _enemies[index].Location.Y;
                     _enemies.RemoveAt(index); 
                     _score += 10;
                     if (_enemies.Count == 0)
@@ -265,6 +294,8 @@ namespace SpaceInvaders
             }
             return false;
         }
+
+
         private bool CollideCheck(Interactable projectile, Interactable character)
         {
             bool yCollision = false;

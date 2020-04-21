@@ -32,38 +32,38 @@ namespace SpaceInvaders
     public sealed partial class ClassicGame : Page
     {
         // Constants
-        const int INTERVAL = 10;
-        const byte FIRE_WAIT = 10;
-        const byte  DEFAULT_ENEMY_WAIT_MOD = 3;
-        const byte DEFAULT_ENEMY_WAIT = 50;
+        private const int INTERVAL = 10;
+        private const byte FIRE_WAIT = 10;
+        private const byte  DEFAULT_ENEMY_WAIT_MOD = 3;
+        private const byte DEFAULT_ENEMY_WAIT = 50;
+        private const byte WAIT = 10;
 
         // Field Variables
-        bool _canFire;
-        bool _gameOn;
-        byte _counter;
-        byte _enemyWait;
-        byte _enemyMOD;
-        Random _rand;
+        private bool _canFire;
+        private bool _gameOn;
+        private byte _counter;
+        private byte _enemyWait;
+        private byte _enemyMOD;
 
         // Objects
-        double _position;
-        SpaceInvaders _game;
-        PlayerTurret _playerTurret;
-        DispatcherTimer _timer;
+        private double _position;
+        private SpaceInvaders _game;
+        private PlayerTurret _playerTurret;
+        private DispatcherTimer _timer;
 
         // Images
-        ImageBrush _imgRocket;
-        BitmapImage _imgFaceGrin;
-        BitmapImage _imgFaceShoot;
-        ImageBrush _imgTank;
-        ImageBrush _imgTankFire;
-        ImageBrush _imgExplode;
-        ImageBrush _imgEnemyDeath;
-        List<ImageBrush> _imgEnemies;
-        List<ImageBrush> _imgPowerUps;
+        private ImageBrush _imgRocket;
+        private BitmapImage _imgFaceGrin;
+        private BitmapImage _imgFaceShoot;
+        private ImageBrush _imgTank;
+        private ImageBrush _imgTankFire;
+        private ImageBrush _imgExplode;
+        private ImageBrush _imgEnemyDeath;
+        private List<ImageBrush> _imgEnemies;
+        private List<ImageBrush> _imgPowerUps;
 
-        MediaPlayer soundplayer;
-        MediaPlayer musicplayer;
+        private MediaPlayer soundplayer;
+        private MediaPlayer musicplayer;
         public ClassicGame()
         {
             this.InitializeComponent();
@@ -84,12 +84,17 @@ namespace SpaceInvaders
         /// <param name="e"></param>
         private void _timer_Tick(object sender, object e)
         {
-            _game.BulletCheck(_imgExplode);
+            _game.BulletCheck(_imgExplode, _imgPowerUps, _powerUp);
 
             if (_counter % _enemyWait == 0)
             {
                 _game.EnemyMove(); //UNCOMMENT FOR MOVEMENT
                 EnemySpeed();
+            }
+
+            if (_counter % WAIT == 0)
+            {
+                _game.PowerUpMove(); //UNCOMMENT FOR POWERUP FALLING
             }
 
             if (_counter%FIRE_WAIT == 0)
@@ -131,11 +136,6 @@ namespace SpaceInvaders
             _game.Enemies.Clear();
             EnemyCreation();
             _gameOn = true;
-        }
-
-        private void DropPowerUP()
-        {
-            // Drop a power up, may be moved to SpaceInvaders.cs
         }
 
         private void EnemyCreation(bool firstTime = false)
@@ -249,10 +249,10 @@ namespace SpaceInvaders
             _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlack.png")) });
 
             _imgPowerUps = new List<ImageBrush>();
-            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupBlue_bolt.png")) });
-            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupGreen_bolt.png")) });
-            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupRed_bolt.png")) });
-            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupYellow_bolt.png")) });
+            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupYellow_bolt.png")) }); // Extra Life
+            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupRed_bolt.png")) }); // Double Tap
+            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupBlue_bolt.png")) }); // Shield
+            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupGreen_bolt.png")) }); // Extra Points
         }
 
         private void SoundLoader()
@@ -283,7 +283,6 @@ namespace SpaceInvaders
             EnemyCreation(true);
             EnemySpeed();
             _gameOn = true;
-            _rand = new Random();
         }
     }
 }
