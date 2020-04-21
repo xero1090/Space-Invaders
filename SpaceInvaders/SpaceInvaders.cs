@@ -93,6 +93,11 @@ namespace SpaceInvaders
             _bullets.Add(laser);
         }*/
 
+        public void CreatePowerUp(double xStart, double yStart, Effect type, ImageBrush sprite, Rectangle powerUpCopy)
+        {
+            PowerUp powerUpHolder = new PowerUp(xStart, yStart, sprite, powerUpCopy, type);
+        }
+
         private Projectile CreateMissile(Rectangle missileCopy, CharInstance shooter)
         {
             sbyte velocity = DEFAULT_LASER_SPEED;

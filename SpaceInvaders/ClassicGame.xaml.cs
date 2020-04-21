@@ -43,6 +43,7 @@ namespace SpaceInvaders
         byte _counter;
         byte _enemyWait;
         byte _enemyMOD;
+        Random _rand;
 
         // Objects
         double _position;
@@ -59,6 +60,7 @@ namespace SpaceInvaders
         ImageBrush _imgExplode;
         ImageBrush _imgEnemyDeath;
         List<ImageBrush> _imgEnemies;
+        List<ImageBrush> _imgPowerUps;
 
         MediaPlayer soundplayer;
         MediaPlayer musicplayer;
@@ -129,6 +131,11 @@ namespace SpaceInvaders
             _game.Enemies.Clear();
             EnemyCreation();
             _gameOn = true;
+        }
+
+        private void DropPowerUP()
+        {
+            // Drop a power up, may be moved to SpaceInvaders.cs
         }
 
         private void EnemyCreation(bool firstTime = false)
@@ -222,6 +229,8 @@ namespace SpaceInvaders
                 }
             }
         }
+        
+        // Loading methods past this line
 
         private void SpriteLoader()
         {
@@ -239,6 +248,11 @@ namespace SpaceInvaders
             _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlue.png")) }); 
             _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlack.png")) });
 
+            _imgPowerUps = new List<ImageBrush>();
+            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupBlue_bolt.png")) });
+            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupGreen_bolt.png")) });
+            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupRed_bolt.png")) });
+            _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupYellow_bolt.png")) });
         }
 
         private void SoundLoader()
@@ -269,6 +283,7 @@ namespace SpaceInvaders
             EnemyCreation(true);
             EnemySpeed();
             _gameOn = true;
+            _rand = new Random();
         }
     }
 }

@@ -31,7 +31,7 @@ namespace SpaceInvaders.Entities
         public BitmapImage Sprite
         { get { return _sprite; } set { _sprite = value; } }
 
-        public PowerUp(double xStart, double yStart, Effect type, ImageBrush sprite, Rectangle powerUpCopy): base(xStart, yStart)
+        public PowerUp(double xStart, double yStart, ImageBrush sprite, Rectangle powerUpCopy, Effect type) : base(xStart, yStart)
         {
             _type = type;
             _obj.Fill = sprite;
@@ -39,7 +39,7 @@ namespace SpaceInvaders.Entities
             _obj.Height = powerUpCopy.Height;
         }
 
-        public PowerUp(double xStart, double yStart, ImageBrush sprite, Rectangle powerUpCopy) : this(xStart, yStart, Effect.ExtraPoints, sprite, powerUpCopy)
+        public PowerUp(double xStart, double yStart, ImageBrush sprite, Rectangle powerUpCopy) : this(xStart, yStart, sprite, powerUpCopy, Effect.ExtraPoints)
         {
         }
 
