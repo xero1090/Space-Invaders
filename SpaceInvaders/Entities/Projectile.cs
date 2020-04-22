@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Shapes;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Shapes;
 
 namespace SpaceInvaders.Entities
 {
@@ -40,7 +34,7 @@ namespace SpaceInvaders.Entities
         /// <param name="xMod"> modification of its location X </param>
         /// <param name="yMod"> modification of its location Y </param>
         /// <param name="missileCopy"></param>
-        public Projectile(double xStart, double yStart, double xMod, double yMod, Rectangle missileCopy): base (xStart, yStart)
+        public Projectile(double xStart, double yStart, double xMod, double yMod, Rectangle missileCopy) : base(xStart, yStart)
         {
             _modifier = new double[] { xMod, yMod };
             _state = MissileState.Intact;

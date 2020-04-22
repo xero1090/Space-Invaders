@@ -1,16 +1,9 @@
-﻿using SpaceInvaders.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
+﻿using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
 
 namespace SpaceInvaders.Characters
-{ 
+{
 	/// <summary>
 	/// Used to determine where the enemies go next
 	/// </summary>
@@ -49,6 +42,6 @@ namespace SpaceInvaders.Characters
 			_obj.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
 			_obj = null;
 		}
-        
+
 	}
 }

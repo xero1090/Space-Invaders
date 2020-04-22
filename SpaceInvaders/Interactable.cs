@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Shapes;
 
 namespace SpaceInvaders
@@ -22,7 +17,7 @@ namespace SpaceInvaders
         { get { return _xLocation; } set { _xLocation = value; } }
         public double Y
         { get { return _yLocation; } set { _yLocation = value; } }
-        
+
         // Initializer
         public location(double xLoc, double yLoc)
         {
