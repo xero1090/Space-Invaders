@@ -15,6 +15,6 @@
         <TextBlock VerticalAlignment="Center" Text="Enter Your Name:" HorizontalAlignment="Center" FontSize="25" Margin="0,200,0,0" Foreground="#FFF8F5F7"/>
         <TextBox x:Name="_name" Width="200" Height="50" VerticalAlignment="Bottom" Margin="0,0,0,180" Foreground="#FF000005" Background="#FFF3F3F6"/>
         <Button x:Name="_submitScore" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,100" Content="Submit" FontSize="30" Width="200" CornerRadius="10" BorderThickness="2" BorderBrush="#FF0C0C0D" Background="#FFFBF7F8" Click="SubmitScore"/>
-        <Button x:Name="_menubtn" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,100" Content="Play Again?" FontSize="30" Width="200" CornerRadius="10" BorderThickness="2" BorderBrush="#FF0C0C0D" Background="#FFFBF7F8" Click="ToMenu"/>
+        <Button x:Name="_menubtn" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,100" Content="Play Again?" Visibility="Collapsed" FontSize="30" Width="200" CornerRadius="10" BorderThickness="2" BorderBrush="#FF0C0C0D" Background="#FFFBF7F8" Click="ToMenu"/>
     </Grid>
 </Page>

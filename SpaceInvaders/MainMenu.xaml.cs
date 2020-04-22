@@ -32,6 +32,7 @@ namespace SpaceInvaders
             this.InitializeComponent();
             _title.FontFamily = new FontFamily("/Assets/Fonts/KenneyThick.ttf#Kenney Thick Regular");
             soundplayer = new MediaPlayer();
+            soundplayer.Volume = 0.3;
             soundplayer.Pause();
             soundplayer.Source = null;
         }
@@ -39,7 +40,8 @@ namespace SpaceInvaders
         private void ToClassic(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Classic), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
-          
+            soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/it-krimah.mp3"));
+            soundplayer.Play();
         }
 
         private void ToGame(object sender, RoutedEventArgs e)

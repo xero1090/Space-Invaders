@@ -166,6 +166,7 @@
     <Content Include="Assets\explosion4.png" />
     <Content Include="Assets\Face Grin.png" />
     <Content Include="Assets\Face shoot.png" />
+    <Content Include="Assets\Sounds\it-krimah.mp3" />
     <Content Include="Assets\Sounds\laser2.ogg" />
     <Content Include="Assets\Sounds\laser3.ogg" />
     <Content Include="Assets\laserGreen.png" />
@@ -177,6 +178,8 @@
     <Content Include="Assets\Missile2.png" />
     <Content Include="Assets\Missile3.png" />
     <Content Include="Assets\Sounds\boom.mp3" />
+    <Content Include="Assets\Sounds\russ.mp3" />
+    <Content Include="Assets\Sounds\sans-screm.mp3" />
     <Content Include="Assets\Splosion.png" />
     <Content Include="Assets\tank fire.png" />
     <Content Include="Assets\tank.png" />
