@@ -381,6 +381,9 @@ namespace SpaceInvaders
             return false;
         }
 
+        /// <summary>
+        /// Called when the player loses
+        /// </summary>
         public void AlienWin()
         {
             for (int index = 0; index < _enemies.Count; ++index)
