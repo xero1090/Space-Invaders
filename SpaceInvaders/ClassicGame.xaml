@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Background="White">
 
-    <Grid x:Name="_grid">
+    <Grid x:Name="_grid" Background="#FFB7F9F9">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -20,8 +20,8 @@
             <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        
+
+
 
         <Canvas x:Name="_canvas" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="405" Width="640">
             <Canvas.Background>
@@ -29,7 +29,7 @@
             </Canvas.Background>
 
             <Rectangle x:Name="_barrier" Height="50" Canvas.Top="355" Width="640" FocusVisualSecondaryBrush="{x:Null}" FocusVisualPrimaryBrush="{x:Null}" Fill="#FF00FFEE"/>
-            
+
             <Rectangle x:Name="_tank" Height="100" Canvas.Left="280" Canvas.Top="305" Width="80" FocusVisualPrimaryBrush="{x:Null}">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/tank.png" Stretch="Uniform"/>
