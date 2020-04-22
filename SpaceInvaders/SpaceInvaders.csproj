@@ -125,9 +125,6 @@
     <Compile Include="Classic.xaml.cs">
       <DependentUpon>Classic.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ClassicBoss.xaml.cs">
-      <DependentUpon>ClassicBoss.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ClassicGame.xaml.cs">
       <DependentUpon>ClassicGame.xaml</DependentUpon>
     </Compile>
@@ -205,10 +202,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ClassicBoss.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ClassicGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -229,6 +222,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Fonts\KenneyThick.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
