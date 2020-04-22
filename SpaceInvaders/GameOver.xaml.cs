@@ -22,9 +22,20 @@ namespace SpaceInvaders
     /// </summary>
     public sealed partial class GameOver : Page
     {
+        private string name;
+        private SpaceInvaders _game;
+
+
         public GameOver()
         {
             this.InitializeComponent();
+            
+        }
+
+        private void SubmitScore(object sender, RoutedEventArgs e)
+        {
+            name = _name.Text;
+            _scores.Text = name + " -------------- " + "800";
         }
     }
 }
