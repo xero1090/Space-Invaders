@@ -1,26 +1,14 @@
-﻿using System;
+﻿using SpaceInvaders.Characters;
+using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using Windows.Media.Core;
 using Windows.Media.Playback;
-using System.Drawing;
 using Windows.UI.Core;
-using Windows.UI.Xaml.Media.Imaging;
-using SpaceInvaders.Characters;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace SpaceInvaders
 {
@@ -32,7 +20,7 @@ namespace SpaceInvaders
         // Constants
         private const int INTERVAL = 10;
         private const byte FIRE_WAIT = 10;
-        private const byte  DEFAULT_ENEMY_WAIT_MOD = 3;
+        private const byte DEFAULT_ENEMY_WAIT_MOD = 3;
         private const byte DEFAULT_ENEMY_WAIT = 50;
         private const byte WAIT = 10;
 
@@ -109,18 +97,18 @@ namespace SpaceInvaders
             }
 
             // Shooting Delay
-            if (_counter%FIRE_WAIT == 0)
+            if (_counter % FIRE_WAIT == 0)
             {
                 _canFire = true;
             }
 
             // Animation for face and tank
-            if (_counter % 20*FIRE_WAIT == 0)
+            if (_counter % 20 * FIRE_WAIT == 0)
             {
                 _face.Source = _imgFaceGrin;
                 _tank.Fill = _imgTank;
             }
-             // If player Dies
+            // If player Dies
             if (_game.Player.Lives <= 0)
             {
                 // Player Dies
@@ -181,7 +169,7 @@ namespace SpaceInvaders
         /// </summary>
         private void EnemySpeed()
         {
-            _enemyWait = (byte) ( _game.Enemies.Count * _enemyMOD);
+            _enemyWait = (byte)(_game.Enemies.Count * _enemyMOD);
 
             if (_enemyWait > DEFAULT_ENEMY_WAIT)
             {
@@ -268,7 +256,7 @@ namespace SpaceInvaders
                 }
             }
         }
-        
+
         // Loading methods past this line
 
         /// <summary>
@@ -286,9 +274,9 @@ namespace SpaceInvaders
 
             // Enemy Images
             _imgEnemies = new List<ImageBrush>();
-            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyRed.png")) }); 
-            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyGreen.png")) }); 
-            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlue.png")) }); 
+            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyRed.png")) });
+            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyGreen.png")) });
+            _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlue.png")) });
             _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlack.png")) });
 
             // PowerUps 

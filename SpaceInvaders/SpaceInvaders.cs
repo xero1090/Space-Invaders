@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Media.Imaging;
-using SpaceInvaders.Characters;
+﻿using SpaceInvaders.Characters;
 using SpaceInvaders.Entities;
-using Windows.UI.Xaml.Shapes;
+using System;
+using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Shapes;
 
 namespace SpaceInvaders
 {
@@ -24,7 +20,7 @@ namespace SpaceInvaders
         private const double POWERUP_DROP_CHANCE = 0.01; // Chance every enemy drops a powerUp
         private const byte SCORE_BONUS = 50;
         private const byte SCORE_CHANGE = 10;
-        
+
         // The Field Variables
         private int _score;
         private location _lastKill;
@@ -82,17 +78,17 @@ namespace SpaceInvaders
         /// </summary>
         /// <param name="shipSprites"> list of their sprites </param>
         /// <param name="enemyCopy"> the base invisible copy from which the new rectangles copy from </param>
-        public void EnemySetup( List<ImageBrush> shipSprites, Rectangle enemyCopy)
+        public void EnemySetup(List<ImageBrush> shipSprites, Rectangle enemyCopy)
         {
             Enemy enemyHolder;
-            double placementStart = _canvas.Width / 2 - ((DEFAULT_ENEMY_COLUMNS / 2)* (enemyCopy.Width + ENEMY_PLACEMENT_BUFFER));
+            double placementStart = _canvas.Width / 2 - ((DEFAULT_ENEMY_COLUMNS / 2) * (enemyCopy.Width + ENEMY_PLACEMENT_BUFFER));
             _goLeft = false;
 
             for (byte rows = 0; rows < shipSprites.Count; ++rows)
             {
                 for (byte columns = 0; columns < DEFAULT_ENEMY_COLUMNS; ++columns)
                 {
-                     enemyHolder = new Enemy(placementStart + (columns * (enemyCopy.Width + ENEMY_PLACEMENT_BUFFER)), rows*(enemyCopy.Height + ENEMY_PLACEMENT_BUFFER), shipSprites[rows], enemyCopy);
+                    enemyHolder = new Enemy(placementStart + (columns * (enemyCopy.Width + ENEMY_PLACEMENT_BUFFER)), rows * (enemyCopy.Height + ENEMY_PLACEMENT_BUFFER), shipSprites[rows], enemyCopy);
                     _canvas.Children.Add(enemyHolder.Obj);
                     _enemies.Add(enemyHolder);
                 }
@@ -235,7 +231,7 @@ namespace SpaceInvaders
                     break;
             }
         }
-        
+
         /// <summary>
         /// Making powerups fall
         /// </summary>
@@ -302,7 +298,7 @@ namespace SpaceInvaders
             return EnemyDirection.Right;
 
         }
-       
+
         /// <summary>
         /// Making sure the player moves acording to boundries
         /// </summary>
@@ -339,11 +335,11 @@ namespace SpaceInvaders
                     _enemies[index].OnDestruction();
                     _lastKill.X = _enemies[index].Location.X;
                     _lastKill.Y = _enemies[index].Location.Y;
-                    _enemies.RemoveAt(index); 
+                    _enemies.RemoveAt(index);
                     _score += SCORE_CHANGE;
                     if (_enemies.Count == 0)
                     {
-                        _score = _score*2;
+                        _score = _score * 2;
                     }
                     return true;
                 }
