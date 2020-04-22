@@ -204,7 +204,7 @@ namespace SpaceInvaders
                 _face.Source = _imgFaceShoot;
                 _missile.Fill = _imgRocket;
                 _canFire = false;
-                soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/boom.mp3"));
+                soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/explosion2.ogg"));
                 soundplayer.Play();
             }
         }

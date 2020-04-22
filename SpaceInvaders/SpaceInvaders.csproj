@@ -152,6 +152,7 @@
     <Content Include="Assets\blue.png" />
     <Content Include="Assets\Boss.png" />
     <Content Include="Assets\ClassicBackground.png" />
+    <Content Include="Assets\Sounds\explosion2.ogg" />
     <Content Include="Assets\shield.png" />
     <Content Include="Assets\Sounds\Boss.mp3" />
     <Content Include="Assets\Sounds\classic.mp3" />
