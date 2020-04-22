@@ -43,9 +43,9 @@ namespace SpaceInvaders
         private byte _counter;
         private byte _enemyWait;
         private byte _enemyMOD;
+        private double _position;
 
         // Objects
-        private double _position;
         private SpaceInvaders _game;
         private PlayerTurret _playerTurret;
         private DispatcherTimer _timer;
