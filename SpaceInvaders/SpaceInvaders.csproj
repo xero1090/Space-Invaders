@@ -131,6 +131,9 @@
     <Compile Include="ClassicGame.xaml.cs">
       <DependentUpon>ClassicGame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameOver.xaml.cs">
+      <DependentUpon>GameOver.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interactable.cs" />
     <Compile Include="Entities\PowerUp.cs" />
     <Compile Include="Entities\Projectile.cs" />
@@ -149,6 +152,7 @@
     <Content Include="Assets\background.png" />
     <Content Include="Assets\background1.png" />
     <Content Include="Assets\begin.ogg" />
+    <Content Include="Assets\blue.png" />
     <Content Include="Assets\Boss.png" />
     <Content Include="Assets\ClassicBackground.png" />
     <Content Include="Assets\shield.png" />
@@ -206,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ClassicGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameOver.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
