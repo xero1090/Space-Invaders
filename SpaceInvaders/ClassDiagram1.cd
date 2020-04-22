@@ -19,7 +19,7 @@
   <Class Name="SpaceInvaders.ClassicGame" BaseTypeListCollapsed="true">
     <Position X="11.25" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAgQQICQAgAAAADGAAmQgCQABKAASAEIIAgAIAFFQ=</HashCode>
+      <HashCode>ABAAgQQACQAgAAEADGAAmQgCQABKAASAEIIAgAIAFFQ=</HashCode>
       <FileName>ClassicGame.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -42,7 +42,7 @@
   <Class Name="SpaceInvaders.SpaceInvaders">
     <Position X="9.25" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAYjACAIAwAAAqwIAAEAKAQACAUAAAACASQIAWGAIAI=</HashCode>
+      <HashCode>BAYjACAIAwAAAqwIAAEAKAAACAUAAAACASQIAWGAIAI=</HashCode>
       <FileName>SpaceInvaders.cs</FileName>
     </TypeIdentifier>
   </Class>

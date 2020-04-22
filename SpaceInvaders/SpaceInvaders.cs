@@ -241,9 +241,14 @@ namespace SpaceInvaders
         /// </summary>
         public void PowerUpMove()
         {
-            foreach (PowerUp powerUp in _powerUps)
+            for (int index = 0; index < _powerUps.Count; ++index)
             {
-                powerUp.Fall();
+                _powerUps[index].Fall();
+                if (_powerUps[index].Location.Y >= _canvas.Height)
+                {
+                    _powerUps[index].Contact();
+                    _powerUps.RemoveAt(index);
+                }
             }
         }
 

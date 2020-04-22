@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -23,7 +24,6 @@ namespace SpaceInvaders
     public sealed partial class GameOver : Page
     {
         private string name;
-        private SpaceInvaders _game;
 
 
         public GameOver()
@@ -36,6 +36,7 @@ namespace SpaceInvaders
         {
             name = _name.Text;
             _scores.Text = name + " -------------- " + "800";
+            this.Frame.Navigate(typeof(MainMenu), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
         }
     }
 }

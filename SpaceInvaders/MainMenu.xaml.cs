@@ -44,7 +44,7 @@ namespace SpaceInvaders
 
         private void ToGame(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ClassicGame), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            this.Frame.Navigate(typeof(ClassicGame), e, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
             soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/begin.ogg"));
             soundplayer.Play();
 

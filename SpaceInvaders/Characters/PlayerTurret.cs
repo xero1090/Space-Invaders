@@ -18,14 +18,14 @@ namespace SpaceInvaders.Characters
     class PlayerTurret : CharInstance
     {
         // Constants
-        const byte DEFAULT_LIVES = 3;
+        const sbyte DEFAULT_LIVES = 3;
         
         // Field Variables
-        private byte _lives;
+        private sbyte _lives;
         private ImageBrush _spriteShoot;
 
         // Properties
-        public byte Lives
+        public sbyte Lives
         { get { return _lives; } set { _lives = value; } }
 
         /// <summary>
