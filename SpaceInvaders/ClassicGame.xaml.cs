@@ -137,6 +137,7 @@ namespace SpaceInvaders
                 _win.Visibility = Visibility.Visible;
                 _gameOn = false;
                 _counter = 0;
+                _powerUpType.Text = "Press E / Enter";
             }
 
             // Counter Reset
@@ -158,6 +159,7 @@ namespace SpaceInvaders
             _win.Visibility = Visibility.Collapsed;
             _game.Enemies.Clear();
             EnemyCreation();
+            _powerUpType.Text = "";
             _gameOn = true;
         }
 
