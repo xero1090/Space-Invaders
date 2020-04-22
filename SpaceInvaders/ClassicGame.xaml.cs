@@ -57,7 +57,6 @@ namespace SpaceInvaders
         private ImageBrush _imgTank;
         private ImageBrush _imgTankFire;
         private ImageBrush _imgExplode;
-        private ImageBrush _imgEnemyDeath;
         private List<ImageBrush> _imgEnemies;
         private List<ImageBrush> _imgPowerUps;
 
@@ -281,7 +280,6 @@ namespace SpaceInvaders
             _imgTankFire = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank fire.png")) };
             _imgRocket = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Missile.png")) };
             _imgExplode = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Splosion.png")) };
-            _imgEnemyDeath = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Explode4.png")) };
 
             // Enemy Images
             _imgEnemies = new List<ImageBrush>();
