@@ -36,7 +36,16 @@ namespace SpaceInvaders
         {
             name = _name.Text;
             _scores.Text = name + " -------------- " + "800";
+            _submitScore.Visibility = Visibility.Collapsed;
+            _menubtn.Visibility = Visibility.Visible;
+           
+        }
+
+        private void ToMenu(object sender, RoutedEventArgs e)
+        {
             this.Frame.Navigate(typeof(MainMenu), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
+            _submitScore.Visibility = Visibility.Visible;
+            _menubtn.Visibility = Visibility.Collapsed;
         }
     }
 }
