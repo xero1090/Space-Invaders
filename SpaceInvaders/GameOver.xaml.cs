@@ -25,8 +25,11 @@ namespace SpaceInvaders
     /// </summary>
     public sealed partial class GameOver : Page
     {
+        private int _score;
         private string name;
         MediaPlayer soundplayer;
+        SpaceInvaders score;
+
 
         public GameOver()
         {
@@ -37,11 +40,17 @@ namespace SpaceInvaders
             soundplayer.Source = null;
 
         }
+        /*private int getScore()
+        {
+           return score.Score;
 
+        }*/
         private void SubmitScore(object sender, RoutedEventArgs e)
         {
+            //getScore();
+           // _score = score.Score;
             name = _name.Text;
-            _scores.Text = name + " -------------- " + "800";
+            _scores.Text = name + " -------------- " + "800" ;//_score 
             soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/sans-screm.mp3"));
             soundplayer.Play();
             _submitScore.Visibility = Visibility.Collapsed;
