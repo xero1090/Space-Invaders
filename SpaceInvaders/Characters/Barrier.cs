@@ -8,17 +8,20 @@ using Windows.UI.Xaml.Shapes;
 
 namespace SpaceInvaders.Characters
 {
+    /// <summary>
+    /// Acts as the place the aliens get to to make the player lose a life
+    /// </summary>
     class Barrier : CharInstance
     {
+        /// <summary>
+        /// Passes the already existing object
+        /// </summary>
+        /// <param name="xStart"></param>
+        /// <param name="yStart"></param>
+        /// <param name="barrier"></param>
         public Barrier(double xStart, double yStart, ref Rectangle barrier): base(xStart, yStart)
         {
             _obj = barrier;
         }
-
-        public override void OnDestruction()
-        {
-            //TODO: Implement the destruction of the barrier
-        }
-
     }
 }

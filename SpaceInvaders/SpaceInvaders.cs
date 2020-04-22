@@ -103,6 +103,19 @@ namespace SpaceInvaders
         }
 
         /// <summary>
+        /// When the game Ends
+        /// </summary>
+        public void End()
+        {
+            for (int index = 0; index < _enemies.Count; ++index)
+            {
+                _enemies[index].OnDestruction();
+            }
+
+            _enemies.Clear();
+        }
+
+        /// <summary>
         /// Creating missiles when the player shoots
         /// </summary>
         /// <param name="missileCopy"> the base invisible copy from which the new rectangles copy from </param>
@@ -341,10 +354,12 @@ namespace SpaceInvaders
             return false;
         }
 
+
         /// <summary>
         /// Checking if a powerup is grabbed and making a change if it is
         /// </summary>
-        public void PowerUpGet()
+        /// <returns> if a power up was gotton </returns>
+        public bool PowerUpGet()
         {
             for (int index = 0; index < _powerUps.Count; ++index)
             {
@@ -360,9 +375,13 @@ namespace SpaceInvaders
                     }
 
                     _powerUps[index].Contact();
-                    _powerUps.RemoveAt(index);             
+                    _powerUps.RemoveAt(index);
+
+                    return true;
                 }
             }
+
+            return false;
         }
 
         public void AlienWin()

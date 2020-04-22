@@ -103,7 +103,10 @@ namespace SpaceInvaders
             if (_counter % WAIT == 0)
             {
                 _game.PowerUpMove(); //UNCOMMENT FOR POWERUP FALLING
-                _game.PowerUpGet();
+                if (_game.PowerUpGet())
+                {
+                    _powerUpType.Text = "Extra Life";
+                }
             }
 
             // Shooting Delay
@@ -124,6 +127,7 @@ namespace SpaceInvaders
                 // Player Dies
                 _gameover.Visibility = Visibility.Visible;
                 _lose = true;
+                _game.End();
             }
 
             // If enemies are gone
@@ -138,9 +142,11 @@ namespace SpaceInvaders
             // Counter Reset
             if (_counter == 201)
             {
+                _powerUpType.Text = "";
                 _counter = 0;
             }
             _score.Text = $"{_game.Score}";
+            _lives.Text = $"{_game.Player.Lives}";
             ++_counter;
         }
 

@@ -20,14 +20,8 @@
             <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="1" Grid.Column="0" Padding="30" Height="190" Width="200" Margin="3,0,0,20" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
-            <Image  Source="Assets/life.png" Height="52" Width="40" Margin="0,0,0,0"/>
-            <Image  Source="Assets/life.png" Height="52" Width="40" Margin="0,0,0,0"/>
-            <Image  Source="Assets/life.png" Height="52" Width="40" Margin="0,0,0,0"/>
-        </StackPanel>
-
-        <Image Grid.Column="1" Grid.Row="0" Source="Assets/XPowerup.png" Height="32" Width="30" Margin="30,0,0,18" HorizontalAlignment="Left"/>
+        
+        
 
         <Canvas x:Name="_canvas" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="405" Width="640">
             <Canvas.Background>
@@ -63,9 +57,14 @@
         </Canvas>
 
         <Image x:Name="_face" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" FocusVisualPrimaryBrush="{x:Null}" Source="/Assets/Face Grin.png" Margin="0,0,0,20"/>
-        <TextBlock x:Name="_gameover" Text="You Failed to Save the Earth Comrade!" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="100" TextAlignment="Center" FontSize="23" Visibility="Collapsed"/>
-        <TextBlock x:Name="_win" Text="You Saved the Earth Comrade!" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="100" TextAlignment="Center" FontSize="23" Visibility="Collapsed"/>
+        <TextBlock x:Name="_gameover" Text="You Failed to Save the Earth Comrade" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="100" TextAlignment="Center" FontSize="36" Visibility="Collapsed" FontWeight="Bold" FocusVisualSecondaryBrush="#99FFFFFF"/>
+        <TextBlock x:Name="_win" Text="You Saved the Earth Comrade!" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="100" TextAlignment="Center" FontSize="36" Visibility="Collapsed" FontWeight="Bold"/>
         <TextBlock Text="Score:" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" Grid.Column="2" Margin="10,0,0,0"/>
         <TextBlock x:Name="_score" Text="0" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" Grid.Column="2" Margin="100,0,0,0"/>
+
+        <TextBlock x:Name="_powerUpType" Text="" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Grid.Column="1" Margin="0,0,0,0"/>
+
+        <TextBlock Text="Lives:" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" Grid.Column="0" Margin="10,0,0,0"/>
+        <TextBlock x:Name="_lives" Text="0" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" Grid.Column="0" Margin="100,0,0,0"/>
     </Grid>
 </Page>
