@@ -11,9 +11,9 @@
     <Grid>
         <Image Source="/Assets/blue.png" Stretch="UniformToFill"/>
         <TextBlock VerticalAlignment="Top" Text="Best Of All Time:" Foreground="#FFF8F5F7" HorizontalAlignment="Center" FontSize="25" Margin="0,70,0,0"/>
-        <TextBlock x:Name="_scores" VerticalAlignment="Center" Width="500" Height="500" Margin="0,0,0,140" Foreground="#FFF8F5F7"/>
-        <TextBlock VerticalAlignment="Center" Text="Enter Your Name:" HorizontalAlignment="Center" FontSize="25" Margin="0,490,0,0" Foreground="#FFF8F5F7"/>
-        <TextBox Width="200" Height="50" VerticalAlignment="Bottom" Margin="0,0,0,180" Foreground="#FF000005" Background="#FFF3F3F6"/>
-        <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,100" Content="Submit" FontSize="30" Width="200" CornerRadius="10" BorderThickness="2" BorderBrush="#FF0C0C0D" Background="#FFFBF7F8"/>
+        <TextBlock x:Name="_scores" Text="" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalTextAlignment="Center" Width="500" Height="300" Margin="0,0,0,100" Foreground="#FFF8F5F7"/>
+        <TextBlock VerticalAlignment="Center" Text="Enter Your Name:" HorizontalAlignment="Center" FontSize="25" Margin="0,200,0,0" Foreground="#FFF8F5F7"/>
+        <TextBox x:Name="_name" Width="200" Height="50" VerticalAlignment="Bottom" Margin="0,0,0,180" Foreground="#FF000005" Background="#FFF3F3F6"/>
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,100" Content="Submit" FontSize="30" Width="200" CornerRadius="10" BorderThickness="2" BorderBrush="#FF0C0C0D" Background="#FFFBF7F8" Click="SubmitScore"/>
     </Grid>
 </Page>

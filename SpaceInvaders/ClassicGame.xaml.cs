@@ -126,6 +126,7 @@ namespace SpaceInvaders
             {
                 // Player Dies
                 _gameover.Visibility = Visibility.Visible;
+                _scoreButton.Visibility = Visibility.Visible;
                 _lose = true;
                 _game.End();
             }
@@ -135,8 +136,11 @@ namespace SpaceInvaders
             {
                 // All Aliens Die
                 _win.Visibility = Visibility.Visible;
+                _scoreButton.Visibility = Visibility.Visible;
                 _gameOn = false;
                 _counter = 0;
+                
+
             }
 
             // Counter Reset
@@ -334,6 +338,12 @@ namespace SpaceInvaders
             EnemySpeed();
             _gameOn = true;
             _lose = false;
+        }
+
+        private void ToScore(object sender, RoutedEventArgs e)
+        {
+            musicplayer.Pause();
+            this.Frame.Navigate(typeof(GameOver), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
     }
 }
