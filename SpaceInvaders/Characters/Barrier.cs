@@ -10,15 +10,14 @@ namespace SpaceInvaders.Characters
 {
     class Barrier : CharInstance
     {
-        public Barrier(double xStart, double yStart, BitmapImage sprite, Rectangle obj): base(xStart, yStart)
+        public Barrier(double xStart, double yStart, ref Rectangle barrier): base(xStart, yStart)
         {
-            base.Sprite = sprite;
+            _obj = barrier;
         }
 
         public override void OnDestruction()
         {
             //TODO: Implement the destruction of the barrier
-            base.OnDestruction();
         }
 
     }

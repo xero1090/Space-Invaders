@@ -34,6 +34,8 @@
                 <ImageBrush ImageSource="/Assets/background1.png"/>
             </Canvas.Background>
 
+            <Rectangle x:Name="_barrier" Height="50" Canvas.Top="355" Width="640" FocusVisualSecondaryBrush="{x:Null}" FocusVisualPrimaryBrush="{x:Null}" Fill="#FF00FFEE"/>
+            
             <Rectangle x:Name="_tank" Height="100" Canvas.Left="280" Canvas.Top="305" Width="80" FocusVisualPrimaryBrush="{x:Null}">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/tank.png" Stretch="Uniform"/>
@@ -57,8 +59,6 @@
                     <ImageBrush ImageSource="/Assets/Powerups/powerupRed_bolt.png"/>
                 </Rectangle.Fill>
             </Rectangle>
-
-
 
         </Canvas>
 

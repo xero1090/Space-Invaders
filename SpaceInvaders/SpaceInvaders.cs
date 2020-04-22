@@ -12,16 +12,21 @@ using Windows.UI.Xaml.Media;
 
 namespace SpaceInvaders
 {
+    /// <summary>
+    /// The class meant to run most of the game
+    /// </summary>
     class SpaceInvaders
     {
-
+        // All of the Constants
         private const sbyte DEFAULT_MISSILE_SPEED = -20;
         private const sbyte DEFAULT_LASER_SPEED = 20;
         private const byte DEFAULT_ENEMY_COLUMNS = 10;
         private const double ENEMY_PLACEMENT_BUFFER = 8;
         private const double POWERUP_DROP_CHANCE = 0.01; // Chance every enemy drops a powerUp
-        private const int SCORE_BONUS = 50;
+        private const byte SCORE_BONUS = 50;
+        private const byte SCORE_CHANGE = 10;
         
+        // The Field Variables
         private uint _score;
         private location _lastKill;
         private EnemyDirection _direction;
@@ -36,7 +41,9 @@ namespace SpaceInvaders
         private List<PowerUp> _powerUps;
         private PlayerTurret _player;
         private Canvas _canvas;
+        private Barrier _barrier;
 
+        // Properties
         public PlayerTurret Player
         { get { return _player; } }
 
@@ -49,7 +56,14 @@ namespace SpaceInvaders
         public location LastKill
         { get { return _lastKill; } }
 
-        public SpaceInvaders(ref PlayerTurret playerTurret, Canvas canvas, double enemyWidth)
+        /// <summary>
+        /// Initializer for the class
+        /// </summary>
+        /// <param name="playerTurret"> Passing the premade turret to a playerturret field variable </param>
+        /// <param name="canvas"> The canvas the game takes place on</param>
+        /// <param name="enemyWidth"> Simply saving the universal enemy width </param>
+        /// <param name="barrier"> The barrier that is used for detection of a loss condition </param>
+        public SpaceInvaders(ref PlayerTurret playerTurret, Canvas canvas, double enemyWidth, ref Rectangle barrier)
         {
             _targets = new List<CharInstance>();
             _enemies = new List<Enemy>();
@@ -63,8 +77,14 @@ namespace SpaceInvaders
             _enemyWidth = enemyWidth;
             _score = 0;
             _rand = new Random();
+            _barrier = new Barrier(0, _canvas.ActualHeight - barrier.ActualHeight, ref barrier);
         }
 
+        /// <summary>
+        /// Sets up the enemies and their config for a new round
+        /// </summary>
+        /// <param name="shipSprites"> list of their sprites </param>
+        /// <param name="enemyCopy"> the base invisible copy from which the new rectangles copy from </param>
         public void EnemySetup( List<ImageBrush> shipSprites, Rectangle enemyCopy)
         {
             Enemy enemyHolder;
@@ -82,6 +102,10 @@ namespace SpaceInvaders
             }
         }
 
+        /// <summary>
+        /// Creating missiles when the player shoots
+        /// </summary>
+        /// <param name="missileCopy"> the base invisible copy from which the new rectangles copy from </param>
         public void PlayerShoot(Rectangle missileCopy)
         {
             Projectile missile = CreateMissile(missileCopy, _player);
@@ -91,22 +115,11 @@ namespace SpaceInvaders
             _bullets.Add(missile);
         }
 
-        /*
-        public void EnemyShoot(Rectangle laserCopy)
-        {
-            Projectile laser = CreateMissile(laserCopy, _enemy);
-            _enemy.EnemyShoot();
-            laser.Move();
-            _canvas.Children.Add(laser.Obj);
-            _bullets.Add(laser);
-        }*/
-
         /// <summary>
         /// Chance of dropping a power up at the most recent kill
         /// </summary>
-        /// <param name="sprite"></param>
-        /// <param name="powerUpCopy"></param>
-        /// <param name="type"></param>
+        /// <param name="sprites"> The different sprites for the powerups </param>
+        /// <param name="powerUpCopy"> the base invisible copy from which the new rectangles copy from </param>
         private void CreatePowerUP(List<ImageBrush> sprites, Rectangle powerUpCopy)
         {
             if (_rand.NextDouble() <= POWERUP_DROP_CHANCE)
@@ -118,6 +131,12 @@ namespace SpaceInvaders
             }
         }
 
+        /// <summary>
+        /// Creating Missiles
+        /// </summary>
+        /// <param name="missileCopy"> the base invisible copy from which the new rectangles copy from </param>
+        /// <param name="shooter"> The shooter of the missiles </param>
+        /// <returns></returns>
         private Projectile CreateMissile(Rectangle missileCopy, CharInstance shooter)
         {
             sbyte velocity = DEFAULT_LASER_SPEED;
@@ -135,6 +154,12 @@ namespace SpaceInvaders
             return missile;
         }
 
+        /// <summary>
+        /// Checking the status of each bullet and clling a create powerup
+        /// </summary>
+        /// <param name="explosion"> explosion sprite </param>
+        /// <param name="powerUps"> sprites for powerups </param>
+        /// <param name="powerUpCopy"> the base invisible copy from which the new rectangles copy from </param>
         public void BulletCheck(ImageBrush explosion, List<ImageBrush> powerUps, Rectangle powerUpCopy)
         {
             bool hit = false;
@@ -174,6 +199,9 @@ namespace SpaceInvaders
             active = null;
         }
 
+        /// <summary>
+        /// Moving enemies based off of which enemies currently exist, and where they are headed
+        /// </summary>
         public void EnemyMove()
         {
             _direction = WhichDirection();
@@ -202,7 +230,10 @@ namespace SpaceInvaders
                     break;
             }
         }
-
+        
+        /// <summary>
+        /// Making powerups fall
+        /// </summary>
         public void PowerUpMove()
         {
             foreach (PowerUp powerUp in _powerUps)
@@ -211,13 +242,18 @@ namespace SpaceInvaders
             }
         }
 
+        /// <summary>
+        /// Finding the direction which the enemies should face
+        /// </summary>
+        /// <returns> direction where the enemies are headed </returns>
         private EnemyDirection WhichDirection()
         {
             double mostLeft = _canvas.Width;
             double mostRight = 0;
             double adjustWidth = _enemyWidth + ENEMY_PLACEMENT_BUFFER;
 
-            if (!_skip)
+            //Finding a new direction
+            if (!_skip) // Making sure it doesnt check after they move down
             {
                 foreach (Enemy enemy in _enemies)
                 {
@@ -257,6 +293,10 @@ namespace SpaceInvaders
 
         }
        
+        /// <summary>
+        /// Making sure the player moves acording to boundries
+        /// </summary>
+        /// <param name="xMod"> How much the player moves by </param>
         public void PlayerMove(double xMod)
         {
             if (xMod <= 0)
@@ -275,6 +315,11 @@ namespace SpaceInvaders
             }
         }
 
+        /// <summary>
+        /// Checking if the aliens get hit by a projectile
+        /// </summary>
+        /// <param name="bullet"> the bullet the check is being performed on </param>
+        /// <returns></returns>
         private bool HitAlien(Projectile bullet)
         {
             for (int index = 0; index < _enemies.Count; ++index)
@@ -285,7 +330,7 @@ namespace SpaceInvaders
                     _lastKill.X = _enemies[index].Location.X;
                     _lastKill.Y = _enemies[index].Location.Y;
                     _enemies.RemoveAt(index); 
-                    _score += 10;
+                    _score += SCORE_CHANGE;
                     if (_enemies.Count == 0)
                     {
                         _score = _score*2;
@@ -296,6 +341,9 @@ namespace SpaceInvaders
             return false;
         }
 
+        /// <summary>
+        /// Checking if a powerup is grabbed and making a change if it is
+        /// </summary>
         public void PowerUpGet()
         {
             for (int index = 0; index < _powerUps.Count; ++index)
@@ -304,7 +352,7 @@ namespace SpaceInvaders
                 {
                     if (_powerUps[index].PowerUpType == Effect.ExtraLife)
                     {
-                        _player.LifeUp();
+                        ++_player.Lives;
                     }
                     else
                     {
@@ -317,6 +365,27 @@ namespace SpaceInvaders
             }
         }
 
+        public void AlienWin()
+        {
+            for (int index = 0; index < _enemies.Count; ++index)
+            {
+                if (CollideCheck(_enemies[index], _barrier))
+                {
+                    _enemies[index].OnDestruction();
+                    _enemies.RemoveAt(index);
+                    _score -= SCORE_CHANGE;
+                    --_player.Lives;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Generic collision checking for various objects derived from Interactables
+        /// </summary>
+        /// <param name="projectile"> object to be checked against another </param>
+        /// <param name="character"> object being checked by another </param>
+        /// <returns></returns>
         private bool CollideCheck(Interactable projectile, Interactable character)
         {
             bool yCollision = false;

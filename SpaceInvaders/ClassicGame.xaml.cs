@@ -20,14 +20,12 @@ using Windows.UI.Xaml.Media.Imaging;
 using SpaceInvaders.Characters;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
-
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using Windows.UI.Xaml.Media.Animation;
 
 namespace SpaceInvaders
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// The page the actual game runs on!
     /// </summary>
     public sealed partial class ClassicGame : Page
     {
@@ -41,6 +39,7 @@ namespace SpaceInvaders
         // Field Variables
         private bool _canFire;
         private bool _gameOn;
+        private bool _lose;
         private byte _counter;
         private byte _enemyWait;
         private byte _enemyMOD;
@@ -62,8 +61,13 @@ namespace SpaceInvaders
         private List<ImageBrush> _imgEnemies;
         private List<ImageBrush> _imgPowerUps;
 
+        // Music Players
         private MediaPlayer soundplayer;
         private MediaPlayer musicplayer;
+
+        /// <summary>
+        /// Intitializes the Classic Game Page
+        /// </summary>
         public ClassicGame()
         {
             this.InitializeComponent();
@@ -84,38 +88,46 @@ namespace SpaceInvaders
         /// <param name="e"></param>
         private void _timer_Tick(object sender, object e)
         {
+            // Check Bullets
             _game.BulletCheck(_imgExplode, _imgPowerUps, _powerUp);
 
+            // Enemy Movement
             if (_counter % _enemyWait == 0)
             {
                 _game.EnemyMove(); //UNCOMMENT FOR MOVEMENT
                 EnemySpeed();
+                _game.AlienWin();
             }
 
+            // PowerUp Falling and interaction
             if (_counter % WAIT == 0)
             {
                 _game.PowerUpMove(); //UNCOMMENT FOR POWERUP FALLING
                 _game.PowerUpGet();
             }
 
+            // Shooting Delay
             if (_counter%FIRE_WAIT == 0)
             {
                 _canFire = true;
             }
 
+            // Animation for face and tank
             if (_counter % 20*FIRE_WAIT == 0)
             {
                 _face.Source = _imgFaceGrin;
                 _tank.Fill = _imgTank;
             }
-
+             // If player Dies
             if (_game.Player.Lives == 0)
             {
                 // Player Dies
                 _gameover.Visibility = Visibility.Visible;
+                _lose = true;
             }
 
-            if (_game.Enemies.Count == 0)
+            // If enemies are gone
+            if (_game.Enemies.Count == 0 && !_lose)
             {
                 // All Aliens Die
                 _win.Visibility = Visibility.Visible;
@@ -123,6 +135,7 @@ namespace SpaceInvaders
                 _counter = 0;
             }
 
+            // Counter Reset
             if (_counter == 201)
             {
                 _counter = 0;
@@ -130,7 +143,10 @@ namespace SpaceInvaders
             _score.Text = $"{_game.Score}";
             ++_counter;
         }
-        
+
+        /// <summary>
+        /// New Round initiated
+        /// </summary>
         private void EndOfRound()
         {
             _win.Visibility = Visibility.Collapsed;
@@ -139,6 +155,10 @@ namespace SpaceInvaders
             _gameOn = true;
         }
 
+        /// <summary>
+        /// Creating the Enemies
+        /// </summary>
+        /// <param name="firstTime"> First round of the game </param>
         private void EnemyCreation(bool firstTime = false)
         {
             _game.EnemySetup(_imgEnemies, _enemy);
@@ -148,6 +168,9 @@ namespace SpaceInvaders
             }
         }
 
+        /// <summary>
+        /// Determines the enemy speed
+        /// </summary>
         private void EnemySpeed()
         {
             _enemyWait = (byte) ( _game.Enemies.Count * _enemyMOD);
@@ -157,13 +180,16 @@ namespace SpaceInvaders
                 _enemyWait = DEFAULT_ENEMY_WAIT;
             }
 
-            // Avoiding destroying the world by dividing 
+            // Avoiding destroying the world by avoiding dividing by 0
             if (_enemyWait == 0)
             {
                 _enemyWait = 1;
             }
         }
 
+        /// <summary>
+        /// When the player shoots a missile
+        /// </summary>
         private void PlayerMissile_fired()
         {
             if (_canFire)
@@ -176,15 +202,14 @@ namespace SpaceInvaders
                 soundplayer.Play();
             }
         }
-        private void EnemyMissile_fired()
-        {
-         // _game.EnemyShoot(_laser);
-            soundplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/laser3.ogg"));
-            soundplayer.Play();
-        }
+
+        /// <summary>
+        /// Called when the user provides input from the keyboard or a controller
+        /// </summary>
+        /// <param name="sender"> The actual window of the game </param>
+        /// <param name="args"></param>
         private void KeyPress(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
-
             //  Shooting
             if (sender.GetKeyState(Windows.System.VirtualKey.W).HasFlag(CoreVirtualKeyStates.Down) || // W key
                     sender.GetKeyState(Windows.System.VirtualKey.Up).HasFlag(CoreVirtualKeyStates.Down) || // Up arrow key
@@ -228,13 +253,22 @@ namespace SpaceInvaders
                     EndOfRound();
                     _enemyWait = DEFAULT_ENEMY_WAIT;
                 }
+
+                if (_lose)
+                {
+                    this.Frame.Navigate(typeof(MainMenu), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
+                }
             }
         }
         
         // Loading methods past this line
 
+        /// <summary>
+        /// Loading Images into field variables
+        /// </summary>
         private void SpriteLoader()
         {
+            // Singular Images
             _imgFaceGrin = new BitmapImage(new Uri("ms-appx:///Assets/Face Grin.png"));
             _imgFaceShoot = new BitmapImage(new Uri("ms-appx:///Assets/Face shoot.png"));
             _imgTank = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/tank.png")) };
@@ -243,17 +277,22 @@ namespace SpaceInvaders
             _imgExplode = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Splosion.png")) };
             _imgEnemyDeath = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Explode4.png")) };
 
+            // Enemy Images
             _imgEnemies = new List<ImageBrush>();
             _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyRed.png")) }); 
             _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyGreen.png")) }); 
             _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlue.png")) }); 
             _imgEnemies.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/enemyBlack.png")) });
 
+            // PowerUps 
             _imgPowerUps = new List<ImageBrush>();
             _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupYellow_bolt.png")) }); // Extra Life
             _imgPowerUps.Add(new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/Powerups/powerupGreen_bolt.png")) }); // Extra Points
         }
 
+        /// <summary>
+        /// Setting up the Sound Players and assets
+        /// </summary>
         private void SoundLoader()
         {
             soundplayer = new MediaPlayer();
@@ -263,6 +302,9 @@ namespace SpaceInvaders
             musicplayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/classic.mp3"));
         }
 
+        /// <summary>
+        /// Setting up the dispatch timer
+        /// </summary>
         private void TimerSetup()
         {
             _timer = new DispatcherTimer();
@@ -271,17 +313,21 @@ namespace SpaceInvaders
             _timer.Start();
         }
 
+        /// <summary>
+        /// Setting up the actual SpaceInvaders.cs file
+        /// </summary>
         private void GameSetup()
         {
             _position = (double)_tank.GetValue(Canvas.LeftProperty);
             _playerTurret = new PlayerTurret(_position, (double)_tank.GetValue(Canvas.TopProperty), _imgTank, _imgTankFire, _tank);
-            _game = new SpaceInvaders(ref _playerTurret, _canvas, _enemy.Width);
+            _game = new SpaceInvaders(ref _playerTurret, _canvas, _enemy.Width, ref _barrier);
             _canFire = true;
             _counter = 1;
             _enemyMOD = DEFAULT_ENEMY_WAIT_MOD;
             EnemyCreation(true);
             EnemySpeed();
             _gameOn = true;
+            _lose = false;
         }
     }
 }
