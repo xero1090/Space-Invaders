@@ -179,7 +179,7 @@ namespace SpaceInvaders
             // Avoiding destroying the world by avoiding dividing by 0
             if (_enemyWait == 0)
             {
-                _enemyWait = 1;
+                _enemyWait = 5;
             }
         }
 
@@ -328,6 +328,7 @@ namespace SpaceInvaders
         private void ToScore(object sender, RoutedEventArgs e)
         {
             musicplayer.Pause();
+            _canvas.Children.Clear();
             this._page = null;
             this.Frame.Navigate(typeof(GameOver), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
