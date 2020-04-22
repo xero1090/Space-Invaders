@@ -19,7 +19,6 @@ namespace SpaceInvaders
     {
         // All of the Constants
         private const sbyte DEFAULT_MISSILE_SPEED = -20;
-        private const sbyte DEFAULT_LASER_SPEED = 20;
         private const byte DEFAULT_ENEMY_COLUMNS = 10;
         private const double ENEMY_PLACEMENT_BUFFER = 8;
         private const double POWERUP_DROP_CHANCE = 0.01; // Chance every enemy drops a powerUp
@@ -27,7 +26,7 @@ namespace SpaceInvaders
         private const byte SCORE_CHANGE = 10;
         
         // The Field Variables
-        private uint _score;
+        private int _score;
         private location _lastKill;
         private EnemyDirection _direction;
         private double _enemyWidth;
@@ -35,7 +34,6 @@ namespace SpaceInvaders
         private bool _skip;
         private Random _rand;
 
-        private List<CharInstance> _targets;
         private List<Enemy> _enemies;
         private List<Projectile> _bullets;
         private List<PowerUp> _powerUps;
@@ -50,7 +48,7 @@ namespace SpaceInvaders
         public List<Enemy> Enemies
         { get { return _enemies; } }
 
-        public uint Score
+        public int Score
         { get { return _score; } }
 
         public location LastKill
@@ -65,7 +63,6 @@ namespace SpaceInvaders
         /// <param name="barrier"> The barrier that is used for detection of a loss condition </param>
         public SpaceInvaders(ref PlayerTurret playerTurret, Canvas canvas, double enemyWidth, ref Rectangle barrier)
         {
-            _targets = new List<CharInstance>();
             _enemies = new List<Enemy>();
             _bullets = new List<Projectile>();
             _powerUps = new List<PowerUp>();
@@ -152,12 +149,7 @@ namespace SpaceInvaders
         /// <returns></returns>
         private Projectile CreateMissile(Rectangle missileCopy, CharInstance shooter)
         {
-            sbyte velocity = DEFAULT_LASER_SPEED;
-
-            if (shooter.GetType() == _player.GetType())
-            {
-                velocity = DEFAULT_MISSILE_SPEED;
-            }
+            sbyte velocity = DEFAULT_MISSILE_SPEED;
 
             // creating the projectile
             Projectile missile = new Projectile(shooter.Location.X + shooter.Obj.Width / 2, shooter.Location.Y, 0, velocity, missileCopy);
