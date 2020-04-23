@@ -9,16 +9,19 @@ namespace SpaceInvaders.Characters
     /// </summary>
     class PlayerTurret : CharInstance
     {
-        // Constants
+        #region Constants
         const sbyte DEFAULT_LIVES = 3;
+        #endregion
 
-        // Field Variables
+        #region Field Variables
         private sbyte _lives;
         private ImageBrush _spriteShoot;
+        #endregion
 
-        // Properties
+        #region Properties
         public sbyte Lives
         { get { return _lives; } set { _lives = value; } }
+        #endregion
 
         /// <summary>
         /// Initializer for the PlayerTurret
@@ -28,6 +31,8 @@ namespace SpaceInvaders.Characters
         /// <param name="sprite"> Base tank sprite </param>
         /// <param name="spriteShoot"> sprite for when the tank shoots </param>
         /// <param name="obj"> the obj the player is assaigned </param>
+        
+        #region Constructor
         public PlayerTurret(double xStart, double yStart, ImageBrush sprite, ImageBrush spriteShoot, Rectangle obj) : base(xStart, yStart)
         {
             base._sprite = sprite.ImageSource as BitmapImage;
@@ -35,11 +40,14 @@ namespace SpaceInvaders.Characters
             _lives = DEFAULT_LIVES;
             _obj = obj;
         }
+        #endregion
 
+        #region Methods
         // When the player shoots
         public void ShootMissile()
         {
             _obj.Fill = _spriteShoot;
         }
+        #endregion
     }
 }

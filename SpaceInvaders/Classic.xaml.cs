@@ -11,8 +11,12 @@ namespace SpaceInvaders
 
     public sealed partial class Classic : Page
     {
+        #region Field Variables
         // Declare our Windows Media Player
-        MediaPlayer player;
+        private MediaPlayer player;
+        #endregion
+
+        #region Constructor
         public Classic()
         {
             this.InitializeComponent();
@@ -21,7 +25,9 @@ namespace SpaceInvaders
             player.Pause();
             player.Source = null;
         }
+        #endregion
 
+        #region Methods
         private void ToMenu(object sender, RoutedEventArgs e)
         {
 
@@ -42,5 +48,6 @@ namespace SpaceInvaders
             player.Source = MediaSource.CreateFromStorageFile(file);
             player.Play();
         }
+        #endregion
     }
 }

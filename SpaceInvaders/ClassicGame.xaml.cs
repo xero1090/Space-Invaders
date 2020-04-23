@@ -17,13 +17,16 @@ namespace SpaceInvaders
     /// </summary>
     public sealed partial class ClassicGame : Page
     {
+        #region Constants
         // Constants
         private const int INTERVAL = 10;
         private const byte FIRE_WAIT = 10;
         private const byte DEFAULT_ENEMY_WAIT_MOD = 3;
         private const byte DEFAULT_ENEMY_WAIT = 50;
         private const byte WAIT = 10;
+        #endregion
 
+        #region Field Variables
         // Field Variables
         private bool _canFire;
         private bool _gameOn;
@@ -32,12 +35,16 @@ namespace SpaceInvaders
         private byte _enemyWait;
         private byte _enemyMOD;
         private double _position;
+        #endregion
 
+        #region Objects
         // Objects
         private SpaceInvaders _game;
         private PlayerTurret _playerTurret;
         private DispatcherTimer _timer;
+        #endregion
 
+        #region Images
         // Images
         private ImageBrush _imgRocket;
         private BitmapImage _imgFaceGrin;
@@ -47,14 +54,19 @@ namespace SpaceInvaders
         private ImageBrush _imgExplode;
         private List<ImageBrush> _imgEnemies;
         private List<ImageBrush> _imgPowerUps;
+        #endregion
 
+        #region MusicPlayer
         // Music Players
         private MediaPlayer soundplayer;
         private MediaPlayer musicplayer;
+        #endregion
 
         /// <summary>
         /// Intitializes the Classic Game Page
         /// </summary>
+       
+        #region Constructor
         public ClassicGame()
         {
             this.InitializeComponent();
@@ -67,12 +79,15 @@ namespace SpaceInvaders
             TimerSetup();
             GameSetup();
         }
+        #endregion
 
         /// <summary>
         /// Practically acts as the game loop
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+
+        #region Methods
         private void _timer_Tick(object sender, object e)
         {
             // Check Bullets
@@ -332,5 +347,6 @@ namespace SpaceInvaders
             this._page = null;
             this.Frame.Navigate(typeof(GameOver), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
+        #endregion
     }
 }

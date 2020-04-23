@@ -13,6 +13,7 @@ namespace SpaceInvaders
     /// </summary>
     class SpaceInvaders
     {
+        #region Constants
         // All of the Constants
         private const sbyte DEFAULT_MISSILE_SPEED = -20;
         private const byte DEFAULT_ENEMY_COLUMNS = 10;
@@ -20,7 +21,9 @@ namespace SpaceInvaders
         private const double POWERUP_DROP_CHANCE = 0.01; // Chance every enemy drops a powerUp
         private const byte SCORE_BONUS = 50;
         private const byte SCORE_CHANGE = 10;
+        #endregion
 
+        #region Field Variables
         // The Field Variables
         private int _score;
         private location _lastKill;
@@ -29,14 +32,15 @@ namespace SpaceInvaders
         private bool _goLeft;
         private bool _skip;
         private Random _rand;
-
         private List<Enemy> _enemies;
         private List<Projectile> _bullets;
         private List<PowerUp> _powerUps;
         private PlayerTurret _player;
         private Canvas _canvas;
         private Barrier _barrier;
+        #endregion
 
+        #region Properties
         // Properties
         public PlayerTurret Player
         { get { return _player; } }
@@ -49,6 +53,7 @@ namespace SpaceInvaders
 
         public location LastKill
         { get { return _lastKill; } }
+        #endregion
 
         /// <summary>
         /// Initializer for the class
@@ -57,6 +62,8 @@ namespace SpaceInvaders
         /// <param name="canvas"> The canvas the game takes place on</param>
         /// <param name="enemyWidth"> Simply saving the universal enemy width </param>
         /// <param name="barrier"> The barrier that is used for detection of a loss condition </param>
+
+        #region Constructor
         public SpaceInvaders(ref PlayerTurret playerTurret, Canvas canvas, double enemyWidth, ref Rectangle barrier)
         {
             _enemies = new List<Enemy>();
@@ -72,12 +79,15 @@ namespace SpaceInvaders
             _rand = new Random();
             _barrier = new Barrier(0, _canvas.ActualHeight - barrier.ActualHeight, ref barrier);
         }
+        #endregion
 
         /// <summary>
         /// Sets up the enemies and their config for a new round
         /// </summary>
         /// <param name="shipSprites"> list of their sprites </param>
         /// <param name="enemyCopy"> the base invisible copy from which the new rectangles copy from </param>
+
+        #region Methods
         public void EnemySetup(List<ImageBrush> shipSprites, Rectangle enemyCopy)
         {
             Enemy enemyHolder;
@@ -433,6 +443,6 @@ namespace SpaceInvaders
 
             return false;
         }
-
+        #endregion
     }
 }

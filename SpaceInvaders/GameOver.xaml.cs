@@ -5,7 +5,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SpaceInvaders
 {
@@ -14,12 +13,14 @@ namespace SpaceInvaders
     /// </summary>
     public sealed partial class GameOver : Page
     {
+        #region Field Variables
         private int _score;
         private string name;
         MediaPlayer soundplayer;
         SpaceInvaders score;
+        #endregion
 
-
+        #region Constructor
         public GameOver()
         {
             this.InitializeComponent();
@@ -27,13 +28,16 @@ namespace SpaceInvaders
             soundplayer.Volume = 0.3;
             soundplayer.Pause();
             soundplayer.Source = null;
-
         }
+        #endregion
+
+        #region Methods
         /*private int getScore()
         {
            return score.Score;
 
         }*/
+
         private void SubmitScore(object sender, RoutedEventArgs e)
         {
             //getScore();
@@ -55,5 +59,6 @@ namespace SpaceInvaders
             _submitScore.Visibility = Visibility.Visible;
             _menubtn.Visibility = Visibility.Collapsed;
         }
+        #endregion
     }
 }

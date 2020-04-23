@@ -13,9 +13,12 @@ namespace SpaceInvaders.Characters
         /// <param name="xStart"></param>
         /// <param name="yStart"></param>
         /// <param name="barrier"></param>
+
+        #region Constructor
         public Barrier(double xStart, double yStart, ref Rectangle barrier) : base(xStart, yStart)
         {
             _obj = barrier;
         }
+        #endregion
     }
 }

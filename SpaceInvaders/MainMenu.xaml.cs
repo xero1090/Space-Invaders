@@ -14,9 +14,11 @@ namespace SpaceInvaders
 
     public sealed partial class MainMenu : Page
     {
+        #region Object
         MediaPlayer soundplayer;
+        #endregion
 
-
+        #region Constructor
         public MainMenu()
         {
             this.InitializeComponent();
@@ -26,7 +28,9 @@ namespace SpaceInvaders
             soundplayer.Pause();
             soundplayer.Source = null;
         }
+        #endregion
 
+        #region Methods
         private void ToClassic(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Classic), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
@@ -47,7 +51,7 @@ namespace SpaceInvaders
             CoreApplication.Exit();
 
         }
-
+        #endregion
 
     }
 }
